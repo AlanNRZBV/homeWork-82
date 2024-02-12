@@ -7,7 +7,6 @@ import tracksRouter from './routers/tracks';
 import albumsRouter from './routers/albums';
 import artistsRouter from './routers/artists';
 
-
 const app = express();
 const port = 8000;
 
@@ -28,7 +27,7 @@ const run = async () => {
 
   process.on('exit', () => {
     mongoose.disconnect();
-  })
+  });
 };
 
 void run();

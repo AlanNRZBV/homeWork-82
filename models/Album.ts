@@ -4,30 +4,30 @@ import Artist from './Artist';
 const AlbumSchema = new Schema({
   title: {
     type: String,
-    required: true
+    required: true,
   },
-  artistId:{
+  artistId: {
     type: Schema.Types.ObjectId,
     ref: 'Artist',
     required: true,
     validate: {
       validator: async (value: Types.ObjectId) => {
-        const artist = await Artist.findById(value)
+        const artist = await Artist.findById(value);
         return Boolean(artist);
       },
       message: 'Artist does not exist!',
-    }
+    },
   },
   releaseDate: {
-    type:String,
-    required: true
-  },
-  cover:{
     type: String,
-    required: false
-  }
-})
+    required: true,
+  },
+  cover: {
+    type: String,
+    required: false,
+  },
+});
 
-const Album= model('Album', AlbumSchema)
+const Album = model('Album', AlbumSchema);
 
-export default Album
+export default Album;

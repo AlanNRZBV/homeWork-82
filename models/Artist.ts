@@ -1,20 +1,20 @@
 import { model, Schema } from 'mongoose';
 
 const ArtistSchema = new Schema({
-  name:{
+  name: {
     type: String,
     required: true,
   },
-  image:{
+  image: {
     type: String,
-    required: false
+    required: false,
   },
-  information:{
+  information: {
     type: String,
-    required: false
-  }
-})
+    required: false,
+  },
+});
 
-const Artist = model('Artist', ArtistSchema)
+const Artist = model('Artist', ArtistSchema);
 
-export default Artist
+export default Artist;
