@@ -29,14 +29,36 @@ tracksRouter.post('/', async (req, res, next) => {
 
 tracksRouter.get('/', async (req, res, next) => {
   try {
+
+
     if (Object.keys(req.query).length === 0) {
       const tracks = await Track.find();
       return res.send(tracks);
     }
-    const albumId = req.query.album;
-    const tracksByAlbum = await Track.find({ albumId: albumId });
 
-    res.send(tracksByAlbum);
+    if('album' in req.query){
+      const value = req.query.album
+      const tracksByAlbum = await Track.find({ albumId: value });
+      return res.send(tracksByAlbum);
+
+    }else if ('artist' in req.query){
+      const value = req.query.artist
+
+      const albumsByArtist = await Album.find({artistId: value})
+
+      const tracksByArtist = []
+
+      for(const album of albumsByArtist){
+        const tracks = await Track.find({albumId: album._id})
+        tracksByArtist.push(...tracks)
+      }
+
+      return res.send(tracksByArtist)
+
+    }
+
+
+    res.send('Something went wrong without an error');
   } catch (e) {
     next(e);
   }
