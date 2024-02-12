@@ -1,8 +1,10 @@
+
 export interface IArtist {
   name: string,
   image: string | null,
   information: string
 }
+
 
 export interface IAlbum {
   title: string,
@@ -10,3 +12,4 @@ export interface IAlbum {
   releaseDate: string,
   cover: string | null
 }
+
