@@ -13,3 +13,9 @@ export interface IAlbum {
   cover: string | null
 }
 
+export interface ITrack {
+  title: string,
+  albumId: string,
+  duration: string | null
+}
+

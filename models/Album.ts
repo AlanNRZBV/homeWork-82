@@ -15,7 +15,7 @@ const AlbumSchema = new Schema({
         const artist = await Artist.findById(value)
         return Boolean(artist);
       },
-      message: 'Category does not exist!',
+      message: 'Artist does not exist!',
     }
   },
   releaseDate: {
