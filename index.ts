@@ -17,7 +17,7 @@ app.use(cors());
 
 app.use('/albums', albumsRouter);
 app.use('/artists', artistsRouter);
-app.use('/artists', tracksRouter);
+app.use('/tracks', tracksRouter);
 
 const run = async () => {
   await mongoose.connect(config.mongoose.db);
