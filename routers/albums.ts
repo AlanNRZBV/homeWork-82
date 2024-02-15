@@ -7,7 +7,6 @@ import Artist from '../models/Artist';
 
 const albumsRouter = Router();
 
-export default albumsRouter;
 
 albumsRouter.post('/', imagesUpload.single('cover'), async (req, res, next) => {
   try {
@@ -76,3 +75,6 @@ albumsRouter.get('/', async (req, res, next) => {
     next(e);
   }
 });
+
+
+export default albumsRouter;
