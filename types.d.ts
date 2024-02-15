@@ -20,9 +20,9 @@ export interface ITrack {
 }
 
 export interface UserFields {
-  username: string,
-  password: string
-  token: string
+  username: string;
+  password: string;
+  token: string;
 }
 
 export interface UserMethods {
@@ -30,4 +30,4 @@ export interface UserMethods {
   generateToken(): void;
 }
 
-type UserModel = Model<UserField, {}, UserMethods>
+type UserModel = Model<UserField, {}, UserMethods>;

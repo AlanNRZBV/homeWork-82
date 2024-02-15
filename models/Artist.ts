@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose';
+import { ArtistFields } from '../types';
 
 const ArtistSchema = new Schema({
   name: {

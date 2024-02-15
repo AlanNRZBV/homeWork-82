@@ -4,49 +4,46 @@ import User from '../models/User';
 
 const usersRouter = Router();
 
-usersRouter.post('/', async(req, res, next)=>{
-  try{
-
+usersRouter.post('/', async (req, res, next) => {
+  try {
     const user = new User({
       username: req.body.username,
-      password: req.body.password
+      password: req.body.password,
     });
 
     user.generateToken();
-    await user.save()
+    await user.save();
 
-    res.send(user)
-  }catch (e) {
-    next(e)
-    if (e instanceof mongoose.Error.ValidationError){
-      return res.status(422).send(e)
+    res.send(user);
+  } catch (e) {
+    next(e);
+    if (e instanceof mongoose.Error.ValidationError) {
+      return res.status(422).send(e);
     }
   }
-})
+});
 
-usersRouter.post('/sessions', async (req,res, next)=>{
-  try{
-    const user = await User.findOne({username: req.body.username})
+usersRouter.post('/sessions', async (req, res, next) => {
+  try {
+    const user = await User.findOne({ username: req.body.username });
 
-    if(!user){
-      return res.status(422).send({error:'Username not found!'})
+    if (!user) {
+      return res.status(422).send({ error: 'Username not found!' });
     }
 
     const isMatch = await user.checkPassword(req.body.password);
 
-    if(!isMatch){
-      return res.status(422).send({error:'Password is wrong'})
+    if (!isMatch) {
+      return res.status(422).send({ error: 'Password is wrong' });
     }
 
     user.generateToken();
     await user.save();
 
-    return res.send({message:'Username and password is correct!', user})
-
-
-  }catch (e){
-    next(e)
+    return res.send({ message: 'Username and password is correct!', user });
+  } catch (e) {
+    next(e);
   }
-})
+});
 
-export default usersRouter
+export default usersRouter;

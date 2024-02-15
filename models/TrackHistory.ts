@@ -4,7 +4,7 @@ import Track from './Track';
 
 const Schema = mongoose.Schema;
 const TrackHistorySchema = new Schema({
-  userId:{
+  userId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
@@ -16,25 +16,25 @@ const TrackHistorySchema = new Schema({
       message: 'User does not exist!',
     },
   },
-  trackId:{
+  trackId: {
     type: Schema.Types.ObjectId,
-    ref:'Track',
+    ref: 'Track',
     required: true,
-    validate:{
-      validator: async (value: Types.ObjectId)=>{
-        const track = await Track.findById(value)
-        return Boolean(track)
+    validate: {
+      validator: async (value: Types.ObjectId) => {
+        const track = await Track.findById(value);
+        return Boolean(track);
       },
-      message: 'Track does not exit'
-    }
+      message: 'Track does not exit',
+    },
   },
-  datetime:{
+  datetime: {
     type: Date,
     required: true,
-    default: ()=> new Date
-  }
-})
+    default: () => new Date(),
+  },
+});
 
-const TrackHistory = model ('TrackHistory', TrackHistorySchema);
+const TrackHistory = model('TrackHistory', TrackHistorySchema);
 
-export default TrackHistory
+export default TrackHistory;
