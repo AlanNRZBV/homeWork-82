@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import User from '../models/User';
 import TrackHistory from '../models/TrackHistory';
+import Track from '../models/Track';
 
 const trackHistoryRouter = Router()
 
@@ -24,7 +25,13 @@ trackHistoryRouter.post('/', async (req,res,next)=>{
       return res.status(401).send({error:'Wrong token!'});
     }
 
+
     const trackId = req.body.trackId
+    const trackCheck = await Track.findById(trackId)
+
+    if(!trackCheck){
+      return res.status(401).send({error: `No track with id: ${req.body.trackId}`})
+    }
 
     const trackHistoryData = {
       userId: user._id,
@@ -35,7 +42,7 @@ trackHistoryRouter.post('/', async (req,res,next)=>{
     await trackHistory.save();
 
 
-    return res.send({message:'This is a secret message!', username: user.username})
+    return res.send({message:'OK!'})
   }catch (e) {
     next(e)
   }
