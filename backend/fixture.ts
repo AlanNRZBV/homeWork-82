@@ -78,7 +78,7 @@ const run = async () => {
       },
       {
         title: 'The Search',
-        artistId: artistShinedown?._id,
+        artistId: artistNf?._id,
         releaseDate: 2019,
         cover: 'fixtures/album_nf_search.png',
       },

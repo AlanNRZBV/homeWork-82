@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import { imagesUpload } from '../multer';
-import { IAlbum } from '../types';
+import { AlbumWithTrackCount, IAlbum } from '../types';
 import Album from '../models/Album';
 import mongoose, { Types } from 'mongoose';
 import Artist from '../models/Artist';
+import Track from '../models/Track';
 
 const albumsRouter = Router();
 
@@ -51,13 +52,15 @@ albumsRouter.get('/:id', async (req, res, next) => {
 
 albumsRouter.get('/', async (req, res, next) => {
   try {
+
     if (Object.keys(req.query).length === 0) {
       const albums = await Album.find();
       return res.send(albums);
     }
-    const artistId = req.query.artist;
 
-    const albumsByArtist = await Album.find({ artistId: artistId });
+    const artistId = req.query.artist;
+    const albumsByArtist = await Album.find({ artistId: artistId }).populate('artistId', '_id, name').sort({ releaseDate: -1 });
+    console.log(albumsByArtist)
 
     res.send(albumsByArtist);
   } catch (e) {

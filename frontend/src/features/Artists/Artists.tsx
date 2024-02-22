@@ -14,7 +14,7 @@ const Artists = () => {
   useEffect(() => {
     dispatch(fetchArtists())
   }, [dispatch]);
-  
+
   return (
     <Grid container spacing={2} sx={{mt:5}}>
       {isLoading ? (<CircularProgress />) :

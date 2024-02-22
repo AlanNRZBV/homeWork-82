@@ -9,7 +9,7 @@ export const fetchArtists = createAsyncThunk<Artist[] | undefined>(
       const response = await axiosApi.get<Artist[]>('/artists')
       return response.data
     } catch (e) {
-      console.log('Caught on try - FETCH ARTIST - ', e);
+      console.log('Caught on try - FETCH ARTISTS - ', e);
 
     }
   },

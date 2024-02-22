@@ -4,13 +4,24 @@ import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@
 import Grid from '@mui/material/Unstable_Grid2'
 import { apiURL } from '../../constants.ts';
 import imageNotAvailable from '../../assets/images/image_not_available.png';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../app/hooks.ts';
+import { fetchArtist } from '../Artist/artistThunk.ts';
 
 const ArtistsItem:FC<Artist> = ({_id, name,information,image}) => {
+
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   let cardImage = imageNotAvailable;
 
   if (image) {
     cardImage = apiURL + '/' + image;
+  }
+
+  const clickHandle = async()=>{
+    await dispatch(fetchArtist(_id))
+    navigate(`/artist/${_id}`)
   }
   return (
     <Grid>
@@ -30,7 +41,7 @@ const ArtistsItem:FC<Artist> = ({_id, name,information,image}) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More{_id}</Button>
+        <Button  to={`/artist/${_id}`} component={NavLink} color="primary" variant="contained" sx={{mr:2}}>More</Button>
       </CardActions>
     </Card>
     </Grid>
