@@ -6,7 +6,7 @@ const Navigation = () => {
   return (
     <AppBar position="static" color="primary">
       <Toolbar>
-        <Typography to="/" component={NavLink} variant="h6" color="white" sx={{mr:'auto', textDecoration:'none'}}>Finance Tracker</Typography>
+        <Typography to="/" component={NavLink} variant="h6" color="white" sx={{mr:'auto', textDecoration:'none'}}>Spotify</Typography>
         <Box>
           <Button to="/categories" component={NavLink} color="primary" variant="contained" sx={{mr:2}}>Categories</Button>
           <LoadingButton type="button" color="warning" variant="contained">
