@@ -19,12 +19,11 @@ const AlbumSchema = new Schema({
     },
   },
   releaseDate: {
-    type: String,
+    type: Number,
     required: true,
   },
   cover: {
     type: String,
-    required: false,
   },
 });
 

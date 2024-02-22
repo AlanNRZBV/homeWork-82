@@ -20,8 +20,11 @@ const TrackSchema = new Schema({
   },
   duration: {
     type: String,
-    required: false,
   },
+  position:{
+    type: Number,
+    required: true
+  }
 });
 
 const Track = model('Track', TrackSchema);
