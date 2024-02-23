@@ -21,10 +21,10 @@ const TrackSchema = new Schema({
   duration: {
     type: String,
   },
-  position:{
+  position: {
     type: Number,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const Track = model('Track', TrackSchema);

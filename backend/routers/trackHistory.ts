@@ -5,9 +5,8 @@ import auth, { RequestWithUser } from '../middleware/auth';
 
 const trackHistoryRouter = Router();
 
-trackHistoryRouter.post('/', auth,async (req: RequestWithUser, res, next) => {
+trackHistoryRouter.post('/', auth, async (req: RequestWithUser, res, next) => {
   try {
-
     const trackId = req.body.trackId;
     const trackCheck = await Track.findById(trackId);
 

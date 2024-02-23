@@ -36,7 +36,7 @@ tracksRouter.get('/', async (req, res, next) => {
 
     if ('album' in req.query) {
       const value = req.query.album;
-      const tracksByAlbum = await Track.find({ albumId: value });
+      const tracksByAlbum = await Track.find({ albumId: value }).sort({ position: 1 });
       return res.send(tracksByAlbum);
     } else if ('artist' in req.query) {
       const value = req.query.artist;

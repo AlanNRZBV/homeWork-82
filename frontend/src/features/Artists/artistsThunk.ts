@@ -6,11 +6,10 @@ export const fetchArtists = createAsyncThunk<Artist[] | undefined>(
   'artists/fetch',
   async () => {
     try {
-      const response = await axiosApi.get<Artist[]>('/artists')
-      return response.data
+      const response = await axiosApi.get<Artist[]>('/artists');
+      return response.data;
     } catch (e) {
       console.log('Caught on try - FETCH ARTISTS - ', e);
-
     }
   },
 );

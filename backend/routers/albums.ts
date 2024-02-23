@@ -20,7 +20,7 @@ albumsRouter.post('/', imagesUpload.single('cover'), async (req, res, next) => {
     const album = new Album(albumData);
     await album.save();
 
-    return res.send({message: 'Album has been successfully created', album});
+    return res.send({ message: 'Album has been successfully created', album });
   } catch (e) {
     if (e instanceof mongoose.Error.ValidationError) {
       return res.status(422).send(e);
@@ -38,7 +38,7 @@ albumsRouter.get('/:id', async (req, res, next) => {
       return res.status(404).send({ error: 'Wrong ObjectId!' });
     }
 
-    const album = await Album.findById(_id).populate('artistId','_id, name information image');
+    const album = await Album.findById(_id).populate('artistId', '_id, name information image');
 
     if (!album) {
       return res.status(404).send({ error: 'Not found!' });
@@ -52,15 +52,15 @@ albumsRouter.get('/:id', async (req, res, next) => {
 
 albumsRouter.get('/', async (req, res, next) => {
   try {
-
     if (Object.keys(req.query).length === 0) {
       const albums = await Album.find();
       return res.send(albums);
     }
 
     const artistId = req.query.artist;
-    const albumsByArtist = await Album.find({ artistId: artistId }).populate('artistId', '_id, name').sort({ releaseDate: -1 });
-    console.log(albumsByArtist)
+    const albumsByArtist = await Album.find({ artistId: artistId })
+      .populate('artistId', '_id, name')
+      .sort({ releaseDate: -1 });
 
     res.send(albumsByArtist);
   } catch (e) {

@@ -1,17 +1,29 @@
-import {AppBar, Box, Button, Toolbar, Typography} from "@mui/material";
-import { LoadingButton } from "@mui/lab";
-import {NavLink} from "react-router-dom";
+import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 const Navigation = () => {
   return (
     <AppBar position="static" color="primary">
       <Toolbar>
-        <Typography to="/" component={NavLink} variant="h6" color="white" sx={{mr:'auto', textDecoration:'none'}}>Spotify</Typography>
+        <Typography
+          to="/"
+          component={NavLink}
+          variant="h6"
+          color="white"
+          sx={{ mr: 'auto', textDecoration: 'none' }}
+        >
+          Spotify
+        </Typography>
         <Box>
-          <Button to="/categories" component={NavLink} color="primary" variant="contained" sx={{mr:2}}>Categories</Button>
-          <LoadingButton type="button" color="warning" variant="contained">
-            Add
-          </LoadingButton>
+          <Button
+            to="/"
+            component={NavLink}
+            color="success"
+            variant="contained"
+            sx={{ mr: 2 }}
+          >
+            Home
+          </Button>
         </Box>
       </Toolbar>
     </AppBar>

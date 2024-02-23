@@ -1,19 +1,24 @@
 import React, { FC } from 'react';
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+} from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Album } from '../../types';
 import imageNotAvailable from '../../assets/images/image_not_available.png';
 import { apiURL } from '../../constants.ts';
 import { NavLink } from 'react-router-dom';
 
-const AlbumItem: FC<Album> = ({cover,title,releaseDate}) => {
-
+const AlbumItem: FC<Album> = ({ _id, cover, title, releaseDate }) => {
   let cardImage = imageNotAvailable;
 
   if (cover) {
     cardImage = apiURL + '/' + cover;
   }
-
 
   return (
     <Grid>
@@ -33,7 +38,15 @@ const AlbumItem: FC<Album> = ({cover,title,releaseDate}) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button  to={`/artist/${_id}`} component={NavLink} color="primary" variant="contained" sx={{mr:2}}>More</Button>
+          <Button
+            to={`/album/${_id}`}
+            component={NavLink}
+            color="primary"
+            variant="contained"
+            sx={{ mr: 2 }}
+          >
+            More
+          </Button>
         </CardActions>
       </Card>
     </Grid>
