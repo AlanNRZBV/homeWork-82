@@ -24,7 +24,7 @@ export const albumSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchAlbum.pending, (state) => {
       state.isAlbumLoading = true;
-      state.isTrackLoading = true;
+      state.isTracksLoading = true;
     });
     builder.addCase(fetchAlbum.fulfilled, (state, { payload: data }) => {
       if (data) {
@@ -32,11 +32,11 @@ export const albumSlice = createSlice({
         state.tracks = data.tracks;
       }
       state.isAlbumLoading = false;
-      state.isTrackLoading = false;
+      state.isTracksLoading = false;
     });
     builder.addCase(fetchAlbum.rejected, (state) => {
       state.isAlbumLoading = false;
-      state.isTrackLoading = false;
+      state.isTracksLoading = false;
     });
   },
 });

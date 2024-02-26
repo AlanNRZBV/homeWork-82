@@ -23,3 +23,6 @@ export const fetchAlbum = createAsyncThunk<
     console.log('Caught on try - FETCH ALBUM AND TRACKS - ', e);
   }
 });
+
+
+

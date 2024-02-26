@@ -14,7 +14,7 @@ const Artist = () => {
   const artistId = useParams();
 
   useEffect(() => {
-    dispatch(fetchArtist(artistId.id));
+    dispatch(fetchArtist(artistId.id as string));
   }, [artistId.id, dispatch]);
 
   if (!isLoading && artist.length === 0) {

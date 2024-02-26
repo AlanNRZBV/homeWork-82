@@ -1,7 +1,12 @@
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { selectUser } from '../../../features/Users/usersSlice.ts';
+import { useAppSelector } from '../../../app/hooks.ts';
+import UserMenu from './UserMenu.tsx';
+import AnonymousMenu from './AnonymousMenu.tsx';
 
 const Navigation = () => {
+  const user = useAppSelector(selectUser);
   return (
     <AppBar position="static" color="primary">
       <Toolbar>
@@ -24,6 +29,11 @@ const Navigation = () => {
           >
             Home
           </Button>
+          {user ? (
+            <UserMenu user={user} />
+          ) : (
+            <AnonymousMenu />
+          )}
         </Box>
       </Toolbar>
     </AppBar>

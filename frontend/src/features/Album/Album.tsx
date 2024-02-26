@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks.ts';
 import {
   albumLoading,
@@ -10,14 +10,13 @@ import {
   Box,
   CircularProgress,
   List,
-  ListItem,
-  ListItemText,
   Typography,
 } from '@mui/material';
 import imageNotAvailable from '../../assets/images/image_not_available.png';
 import { apiURL } from '../../constants.ts';
 import { useParams } from 'react-router-dom';
 import { fetchAlbum } from './albumThunk.ts';
+import CustomListItem from './CustomListItem.tsx';
 
 const Album = () => {
   const dispatch = useAppDispatch();
@@ -30,7 +29,7 @@ const Album = () => {
   let cardImage = imageNotAvailable;
 
   useEffect(() => {
-    dispatch(fetchAlbum(albumId.id));
+    dispatch(fetchAlbum(albumId.id as string));
   }, [albumId.id, dispatch]);
 
   if (
@@ -45,7 +44,7 @@ const Album = () => {
     );
   }
 
-  if (album.cover) {
+  if (album?.cover) {
     cardImage = apiURL + '/' + album.cover;
   }
 
@@ -58,14 +57,12 @@ const Album = () => {
       sx={{ mt: 5 }}
     >
       <Box component="div" display="flex" flexDirection="column">
-        <img src={cardImage} alt={album.title} />
-        <Typography variant="h4">{album.artistId.name}</Typography>
-        <Typography variant="h4">{album.title}</Typography>
+        <img src={cardImage} alt={album?.title} />
+        <Typography variant="h4">{album?.artistId.name}</Typography>
+        <Typography variant="h4">{album?.title}</Typography>
         <List>
-          {tracks.map((item, index) => (
-            <ListItem key={index}>
-              <ListItemText primary={item.title} key={item._id} />
-            </ListItem>
+          {tracks.map((item) => (
+            <CustomListItem title={item.title} key={item._id}  />
           ))}
         </List>
       </Box>
