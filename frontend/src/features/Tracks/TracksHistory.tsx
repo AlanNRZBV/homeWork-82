@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { fetchTrackHistory } from './tracksHistorythunks.ts';
 import { historyState, trackHistoryLoading } from './tracksHistorySlice.ts';
 import { selectUser } from '../Users/usersSlice.ts';
-import CustomListItem from '../Album/CustomListItem.tsx';
+import CustomListItem from '../Albums/CustomListItem.tsx';
 import { List } from '@mui/material';
 
 const TracksHistory = () => {

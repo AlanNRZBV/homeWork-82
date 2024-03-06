@@ -5,7 +5,7 @@ import {
   albumState,
   tracksLoading,
   tracksState,
-} from './albumSlice.ts';
+} from './albumsSlice.ts';
 import {
   Box,
   CircularProgress,
@@ -15,10 +15,10 @@ import {
 import imageNotAvailable from '../../assets/images/image_not_available.png';
 import { apiURL } from '../../constants.ts';
 import { useParams } from 'react-router-dom';
-import { fetchAlbum } from './albumThunk.ts';
+import { fetchAlbum } from './albumsThunk.ts';
 import CustomListItem from './CustomListItem.tsx';
 
-const Album = () => {
+const Albums = () => {
   const dispatch = useAppDispatch();
   const album = useAppSelector(albumState);
   const tracks = useAppSelector(tracksState);
@@ -70,4 +70,4 @@ const Album = () => {
   );
 };
 
-export default Album;
+export default Albums;

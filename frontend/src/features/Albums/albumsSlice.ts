@@ -1,7 +1,7 @@
 import { Album, Track } from '../../types';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store.ts';
-import { fetchAlbum } from './albumThunk.ts';
+import { fetchAlbum } from './albumsThunk.ts';
 
 interface AlbumState {
   data: Album | null;
@@ -17,7 +17,7 @@ const initialState: AlbumState = {
   isTracksLoading: false,
 };
 
-export const albumSlice = createSlice({
+export const albumsSlice = createSlice({
   name: 'album',
   initialState,
   reducers: {},
@@ -41,7 +41,7 @@ export const albumSlice = createSlice({
   },
 });
 
-export const albumReducer = albumSlice.reducer;
+export const albumReducer = albumsSlice.reducer;
 export const albumState = (state: RootState) => state.album.data;
 export const tracksState = (state: RootState) => state.album.tracks;
 export const albumLoading = (state: RootState) => state.album.isAlbumLoading;
