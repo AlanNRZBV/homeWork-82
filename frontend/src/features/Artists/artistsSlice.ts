@@ -1,7 +1,7 @@
 import { Artist } from '../../types';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store.ts';
-import { fetchArtists } from './artistsThunk.ts';
+import { fetchArtists } from './artistsThunks.ts';
 
 interface ArtistsState {
   artists: Artist[];
@@ -21,9 +21,9 @@ const artistsSlice = createSlice({
     builder.addCase(fetchArtists.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(fetchArtists.fulfilled, (state, { payload: artist }) => {
-      if (artist && artist.length > 0) {
-        state.artists = artist;
+    builder.addCase(fetchArtists.fulfilled, (state, { payload: artists }) => {
+      if (artists && artists.length > 0) {
+        state.artists = artists;
       }
       state.isLoading = false;
     });

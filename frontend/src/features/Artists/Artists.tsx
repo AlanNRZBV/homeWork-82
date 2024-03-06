@@ -3,7 +3,7 @@ import { artistsLoading, artistsState } from './artistsSlice.ts';
 import { Box, CircularProgress } from '@mui/material';
 import ArtistsItem from './components/ArtistsItem.tsx';
 import { useEffect } from 'react';
-import { fetchArtists } from './artistsThunk.ts';
+import { fetchArtists } from './artistsThunks.ts';
 
 const Artists = () => {
   const dispatch = useAppDispatch();

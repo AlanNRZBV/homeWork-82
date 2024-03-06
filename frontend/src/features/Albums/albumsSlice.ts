@@ -1,20 +1,16 @@
-import { Album, Track } from '../../types';
+import { Album } from '../../types';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store.ts';
-import { fetchAlbum } from './albumsThunk.ts';
+import { fetchAlbumsByArtist } from './albumsThunks.ts';
 
 interface AlbumState {
-  data: Album | null;
-  tracks: Track[];
-  isAlbumLoading: boolean;
-  isTracksLoading: boolean;
+  albums: Album[];
+  isLoading: boolean;
 }
 
 const initialState: AlbumState = {
-  data: null,
-  tracks: [],
-  isAlbumLoading: false,
-  isTracksLoading: false,
+  albums:[],
+  isLoading: false
 };
 
 export const albumsSlice = createSlice({
@@ -22,27 +18,21 @@ export const albumsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchAlbum.pending, (state) => {
-      state.isAlbumLoading = true;
-      state.isTracksLoading = true;
+    builder.addCase(fetchAlbumsByArtist.pending, (state) => {
+      state.isLoading = true;
     });
-    builder.addCase(fetchAlbum.fulfilled, (state, { payload: data }) => {
-      if (data) {
-        state.data = data.album;
-        state.tracks = data.tracks;
+    builder.addCase(fetchAlbumsByArtist.fulfilled, (state, { payload: albums }) => {
+      state.isLoading = false;
+      if(albums){
+        state.albums = albums
       }
-      state.isAlbumLoading = false;
-      state.isTracksLoading = false;
     });
-    builder.addCase(fetchAlbum.rejected, (state) => {
-      state.isAlbumLoading = false;
-      state.isTracksLoading = false;
+    builder.addCase(fetchAlbumsByArtist.rejected, (state) => {
+      state.isLoading = false;
     });
   },
 });
 
-export const albumReducer = albumsSlice.reducer;
-export const albumState = (state: RootState) => state.album.data;
-export const tracksState = (state: RootState) => state.album.tracks;
-export const albumLoading = (state: RootState) => state.album.isAlbumLoading;
-export const tracksLoading = (state: RootState) => state.album.isTracksLoading;
+export const albumsReducer = albumsSlice.reducer;
+export const albumsState = (state: RootState) => state.albums.albums;
+export const isAlbumsLoading = (state: RootState) => state.albums.isLoading;

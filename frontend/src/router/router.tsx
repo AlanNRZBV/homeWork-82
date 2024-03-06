@@ -25,15 +25,18 @@ export const router = createBrowserRouter([
         element: <Artist />,
       },
       {
-        path: '/album/:id',
+        path: '/albums/:id',
         element: <Albums />,
-      },{
+      },
+      {
         path: '/register',
         element: <Register />,
-      },{
+      },
+      {
         path: '/login',
         element: <Login />,
-      },{
+      },
+      {
         path: '/track-history',
         element: <TracksHistory />,
       },

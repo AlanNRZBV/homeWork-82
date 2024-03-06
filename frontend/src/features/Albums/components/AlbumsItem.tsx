@@ -1,5 +1,3 @@
-import { FC } from 'react';
-import { Artist } from '../../../types';
 import {
   Card,
   CardActionArea,
@@ -7,32 +5,34 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material';
-import { apiURL } from '../../../constants.ts';
-import imageNotAvailable from '../../../assets/images/image_not_available.png';
 import { NavLink } from 'react-router-dom';
+import { Album } from '../../../types';
+import { FC } from 'react';
+import imageNotAvailable from '../../../assets/images/image_not_available.png';
+import { apiURL } from '../../../constants.ts';
 
-const ArtistsItem: FC<Artist> = ({ _id, name, information, image }) => {
+const AlbumsItem: FC<Album> = ({ _id, title, cover, releaseDate }) => {
   let cardImage = imageNotAvailable;
 
-  if (image) {
-    cardImage = apiURL + '/' + image;
+  if (cover) {
+    cardImage = apiURL + '/' + cover;
   }
 
   return (
     <Card>
-      <CardActionArea to={`/albums/${_id}`} component={NavLink}>
+      <CardActionArea to={`/artist/${_id}`} component={NavLink}>
         <CardMedia
           component="img"
-          alt={`${name}'s image`}
+          alt={`${title}'s image`}
           height="140"
           image={cardImage}
         />
         <CardContent>
           <Typography gutterBottom variant="h6" component="div">
-            {name}
+            {title}
           </Typography>
           <Typography variant="body2" color="text.secondary" noWrap={true}>
-            {information}
+            {releaseDate}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -40,4 +40,4 @@ const ArtistsItem: FC<Artist> = ({ _id, name, information, image }) => {
   );
 };
 
-export default ArtistsItem;
+export default AlbumsItem;

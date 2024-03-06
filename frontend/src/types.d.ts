@@ -8,7 +8,7 @@ export interface Artist {
 type ArtistOnlyName = Omit<Artist, 'image', 'information'>;
 
 export interface Album {
-  _id?: string;
+  _id: string;
   title: string;
   artistId?: ArtistOnlyName;
   cover: string | null;
