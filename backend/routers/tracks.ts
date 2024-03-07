@@ -79,5 +79,22 @@ tracksRouter.delete('/:id', auth,permit('admin'),async(req:RequestWithUser,res,n
     next(e)
   }
 })
+tracksRouter.patch('/:id/togglePublished', auth, permit('admin'), async (req: RequestWithUser, res, next) => {
+  if (req.user && req.user.role !== 'admin') {
+    return res.status(403).send({ error: 'not authorized' });
+  }
+  try {
+    const trackId = req.params.id;
+    const trackCheck = await Track.findById(trackId);
+    if (!trackCheck) {
+      return res.send({ error: 'No artist found' });
+    }
+
+    const artistToBePublished = await Track.findOneAndUpdate({ _id: trackId }, { isPublished: !trackCheck.isPublished }, { new: true });
+    return res.send(artistToBePublished)
+  } catch (e) {
+    next(e);
+  }
+});
 
 export default tracksRouter;

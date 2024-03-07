@@ -7,6 +7,7 @@ import Artist from '../models/Artist';
 import Track from '../models/Track';
 import auth, { RequestWithUser } from '../middleware/auth';
 import permit from '../middleware/permit';
+import artistsRouter from './artists';
 
 const albumsRouter = Router();
 
@@ -88,4 +89,21 @@ albumsRouter.delete('/:id', auth,permit('admin'),async(req:RequestWithUser,res,n
   }
 })
 
+albumsRouter.patch('/:id/togglePublished', auth, permit('admin'), async (req: RequestWithUser, res, next) => {
+  if (req.user && req.user.role !== 'admin') {
+    return res.status(403).send({ error: 'not authorized' });
+  }
+  try {
+    const albumId = req.params.id;
+    const albumCheck = await Album.findById(albumId);
+    if (!albumCheck) {
+      return res.send({ error: 'No artist found' });
+    }
+
+    const artistToBePublished = await Album.findOneAndUpdate({ _id: albumId }, { isPublished: !albumCheck.isPublished }, { new: true });
+    return res.send(artistToBePublished)
+  } catch (e) {
+    next(e);
+  }
+});
 export default albumsRouter;

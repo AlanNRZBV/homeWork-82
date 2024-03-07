@@ -21,7 +21,7 @@ artistsRouter.get('/', async (_req, res, next) => {
   }
 });
 
-artistsRouter.post('/', auth, imagesUpload.single('image'), async (req:RequestWithUser, res, next) => {
+artistsRouter.post('/', auth, imagesUpload.single('image'), async (req: RequestWithUser, res, next) => {
   try {
     const artistData: IArtist = {
       name: req.body.name,
@@ -37,19 +37,36 @@ artistsRouter.post('/', auth, imagesUpload.single('image'), async (req:RequestWi
     next(e);
   }
 });
-artistsRouter.delete('/:id', auth,permit('admin'),async(req:RequestWithUser,res,next)=>{
-  if(req.user && req.user.role !== 'admin'){
-    return res.status(403).send({error:'not authorized'})
+artistsRouter.delete('/:id', auth, permit('admin'), async (req: RequestWithUser, res, next) => {
+  if (req.user && req.user.role !== 'admin') {
+    return res.status(403).send({ error: 'not authorized' });
   }
   try {
-    const artistId = req.params.id
-    const artistCheck = await Artist.findById(artistId)
-    if(!artistCheck){
-      return res.send({error:'No artist found'})
+    const artistId = req.params.id;
+    const artistCheck = await Artist.findById(artistId);
+    if (!artistCheck) {
+      return res.send({ error: 'No artist found' });
     }
-    await Artist.deleteOne({_id:artistId})
-    return res.send({message:'Artist successfully deleted'})
-  }catch (e) {
-    next(e)
+    await Artist.deleteOne({ _id: artistId });
+    return res.send({ message: 'Artist successfully deleted' });
+  } catch (e) {
+    next(e);
   }
-})
+});
+artistsRouter.patch('/:id/togglePublished', auth, permit('admin'), async (req: RequestWithUser, res, next) => {
+  if (req.user && req.user.role !== 'admin') {
+    return res.status(403).send({ error: 'not authorized' });
+  }
+  try {
+    const artistId = req.params.id;
+    const artistCheck = await Artist.findById(artistId);
+    if (!artistCheck) {
+      return res.send({ error: 'No artist found' });
+    }
+
+    const artistToBePublished = await Artist.findOneAndUpdate({ _id: artistId }, { isPublished: !artistCheck.isPublished }, { new: true });
+    return res.send(artistToBePublished)
+  } catch (e) {
+    next(e);
+  }
+});
