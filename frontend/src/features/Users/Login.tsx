@@ -60,6 +60,7 @@ const Login = () => {
                 autoComplete="current-username"
                 value={state.username}
                 onChange={inputChangeHandler}
+                fullWidth
               />
             </Grid>
             <Grid item xs={12}>
@@ -70,6 +71,7 @@ const Login = () => {
                 value={state.password}
                 onChange={inputChangeHandler}
                 autoComplete="current-password"
+                fullWidth
               />
             </Grid>
           </Grid>

@@ -70,6 +70,7 @@ const Register = () => {
                 autoComplete="new-username"
                 error={Boolean(getFieldError('username'))}
                 helperText={getFieldError('username')}
+                fullWidth
               />
             </Grid>
             <Grid item xs={12}>
@@ -82,6 +83,7 @@ const Register = () => {
                 autoComplete="new-password"
                 error={Boolean(getFieldError('password'))}
                 helperText={getFieldError('password')}
+                fullWidth
               />
             </Grid>
           </Grid>
