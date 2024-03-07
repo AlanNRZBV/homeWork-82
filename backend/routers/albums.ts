@@ -5,7 +5,8 @@ import Album from '../models/Album';
 import mongoose, { Types } from 'mongoose';
 import Artist from '../models/Artist';
 import Track from '../models/Track';
-import auth from '../middleware/auth';
+import auth, { RequestWithUser } from '../middleware/auth';
+import permit from '../middleware/permit';
 
 const albumsRouter = Router();
 
@@ -68,5 +69,23 @@ albumsRouter.get('/', async (req, res, next) => {
     next(e);
   }
 });
+
+albumsRouter.delete('/:id', auth,permit('admin'),async(req:RequestWithUser,res,next)=>{
+  if(req.user && req.user.role !== 'admin'){
+    return res.status(403).send({error:'not authorized'})
+  }
+
+  try {
+    const albumId = req.params.id
+    const albumCheck = await Album.findById(albumId)
+    if(!albumCheck){
+      return res.send({error:'No album found'})
+    }
+    await Album.deleteOne({_id:albumId})
+    return res.send({message:'Album successfully deleted'})
+  }catch (e) {
+    next(e)
+  }
+})
 
 export default albumsRouter;
