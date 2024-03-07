@@ -2,6 +2,7 @@ import { Router } from 'express';
 import Artist from '../models/Artist';
 import { IArtist } from '../types';
 import { imagesUpload } from '../multer';
+import auth, { RequestWithUser } from '../middleware/auth';
 
 const artistsRouter = Router();
 
@@ -16,7 +17,7 @@ artistsRouter.get('/', async (_req, res, next) => {
   }
 });
 
-artistsRouter.post('/', imagesUpload.single('image'), async (req, res, next) => {
+artistsRouter.post('/', auth, imagesUpload.single('image'), async (req:RequestWithUser, res, next) => {
   try {
     const artistData: IArtist = {
       name: req.body.name,

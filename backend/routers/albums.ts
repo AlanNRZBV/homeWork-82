@@ -5,10 +5,11 @@ import Album from '../models/Album';
 import mongoose, { Types } from 'mongoose';
 import Artist from '../models/Artist';
 import Track from '../models/Track';
+import auth from '../middleware/auth';
 
 const albumsRouter = Router();
 
-albumsRouter.post('/', imagesUpload.single('cover'), async (req, res, next) => {
+albumsRouter.post('/',auth, imagesUpload.single('cover'), async (req, res, next) => {
   try {
     const albumData: IAlbum = {
       title: req.body.title,

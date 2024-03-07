@@ -4,10 +4,11 @@ import Track from '../models/Track';
 import mongoose from 'mongoose';
 import track from '../models/Track';
 import Album from '../models/Album';
+import auth from '../middleware/auth';
 
 const tracksRouter = Router();
 
-tracksRouter.post('/', async (req, res, next) => {
+tracksRouter.post('/',auth, async (req, res, next) => {
   try {
     const trackData: ITrack = {
       title: req.body.title,
