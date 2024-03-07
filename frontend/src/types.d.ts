@@ -66,9 +66,10 @@ export interface RegisterResponse {
   user: User
 }
 
-export interface TrackHistory {
+export interface GetTrackHistoryResponse {
   _id: string;
-  userId: string
-  albumId: {_id: string, title: string};
+  userId: {username:string}
+  trackId: {_id: string, title: string};
   datetime:string
 }
+

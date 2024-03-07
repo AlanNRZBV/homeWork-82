@@ -7,7 +7,7 @@ import { fetchExtendedAlbum } from '../albumsThunks.ts';
 import imageNotAvailable from '../../../assets/images/image_not_available.png';
 import { apiURL } from '../../../constants.ts';
 import Image from 'mui-image';
-import CustomListItem from './CustomListItem.tsx';
+import CustomListItem from '../../../components/CustomListItem/CustomListItem.tsx';
 
 const AlbumExtended = () => {
   const dispatch = useAppDispatch();
