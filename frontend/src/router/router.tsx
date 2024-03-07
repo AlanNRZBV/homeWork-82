@@ -6,6 +6,7 @@ import Albums from '../features/Albums/Albums.tsx';
 import Login from '../features/Users/Login.tsx';
 import Register from '../features/Users/Register.tsx';
 import TracksHistory from '../features/Tracks/TracksHistory.tsx';
+import AlbumExtended from '../features/Albums/components/AlbumExtended.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,9 @@ export const router = createBrowserRouter([
       {
         path: '/albums/:id',
         element: <Albums />,
+      },{
+        path: '/album-extended/:id',
+        element: <AlbumExtended />,
       },
       {
         path: '/register',

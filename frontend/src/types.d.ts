@@ -19,7 +19,7 @@ export interface Track {
   _id: string;
   title: string;
   albumId: string;
-  duration: string | null;
+  duration: string;
   position: string;
 }
 

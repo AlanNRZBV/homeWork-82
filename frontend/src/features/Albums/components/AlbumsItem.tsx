@@ -20,7 +20,7 @@ const AlbumsItem: FC<Album> = ({ _id, title, cover, releaseDate }) => {
 
   return (
     <Card>
-      <CardActionArea to={`/artist/${_id}`} component={NavLink}>
+      <CardActionArea to={`/album-extended/${_id}`} component={NavLink}>
         <CardMedia
           component="img"
           alt={`${title}'s image`}

@@ -13,6 +13,7 @@ const Albums = () => {
   const isLoading = useAppSelector(isAlbumsLoading);
   const artistId = useParams()
 
+
   useEffect(() => {
     dispatch(fetchAlbumsByArtist(artistId.id as string))
   }, [artistId.id, dispatch]);

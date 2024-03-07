@@ -25,11 +25,11 @@ const TracksHistory = () => {
 
   return (
     <>
-      <List>
-        {history.map((item) => (
-          <CustomListItem title={item.title} key={item._id}  />
-        ))}
-      </List>
+      {/*<List>*/}
+      {/*  {history.map((item) => (*/}
+      {/*    <CustomListItem title={item.title} key={item._id}  />*/}
+      {/*  ))}*/}
+      {/*</List>*/}
     </>
   );
 };
