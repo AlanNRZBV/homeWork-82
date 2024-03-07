@@ -16,7 +16,6 @@ const TracksHistory = () => {
     dispatch(fetchTrackHistory());
   }, [dispatch]);
 
-  console.log('history ', history);
   return (
     <Box display="flex" alignItems="center" justifyContent="center" mt={2}>
       {isLoading ? (
@@ -24,7 +23,7 @@ const TracksHistory = () => {
       ) : (
         <>
           {history.length === 0 ? (
-            <></>
+            <Typography>No tracks have been listened to yet</Typography>
           ) : (
             <Box>
               <Typography
