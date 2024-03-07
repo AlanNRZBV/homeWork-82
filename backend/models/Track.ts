@@ -24,7 +24,11 @@ const TrackSchema = new Schema({
   position: {
     type: Number,
     required: true,
-  },
+  },isPublished:{
+    type:Boolean,
+    required:true,
+    default:false
+  }
 });
 
 const Track = model('Track', TrackSchema);
