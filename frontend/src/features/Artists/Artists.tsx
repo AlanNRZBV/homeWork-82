@@ -1,10 +1,10 @@
-import Grid from '@mui/material/Unstable_Grid2';
 import { useAppDispatch, useAppSelector } from '../../app/hooks.ts';
 import { artistsLoading, artistsState } from './artistsSlice.ts';
-import { CircularProgress } from '@mui/material';
-import ArtistsItem from './ArtistsItem.tsx';
+import { Box, CircularProgress } from '@mui/material';
+import ArtistsItem from './components/ArtistsItem.tsx';
 import { useEffect } from 'react';
-import { fetchArtists } from './artistsThunk.ts';
+import { fetchArtists } from './artistsThunks.ts';
+
 const Artists = () => {
   const dispatch = useAppDispatch();
   const artists = useAppSelector(artistsState);
@@ -15,7 +15,11 @@ const Artists = () => {
   }, [dispatch]);
 
   return (
-    <Grid container spacing={2} sx={{ mt: 5 }}>
+    <Box
+      mt={2}
+      gap={2}
+      style={{display:'grid',gridTemplateColumns:'repeat(6,1fr)',gridTemplateRows:'repeat(auto,1fr)'}}
+    >
       {isLoading ? (
         <CircularProgress />
       ) : (
@@ -29,7 +33,7 @@ const Artists = () => {
           />
         ))
       )}
-    </Grid>
+    </Box>
   );
 };
 

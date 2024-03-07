@@ -8,7 +8,7 @@ export interface Artist {
 type ArtistOnlyName = Omit<Artist, 'image', 'information'>;
 
 export interface Album {
-  _id?: string;
+  _id: string;
   title: string;
   artistId?: ArtistOnlyName;
   cover: string | null;
@@ -19,7 +19,7 @@ export interface Track {
   _id: string;
   title: string;
   albumId: string;
-  duration: string | null;
+  duration: string;
   position: string;
 }
 
@@ -66,9 +66,10 @@ export interface RegisterResponse {
   user: User
 }
 
-export interface TrackHistory {
+export interface GetTrackHistoryResponse {
   _id: string;
-  userId: string
-  albumId: {_id: string, title: string};
+  userId: {username:string}
+  trackId: {_id: string, title: string};
   datetime:string
 }
+
