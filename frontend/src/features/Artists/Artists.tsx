@@ -30,6 +30,7 @@ const Artists = () => {
             image={item.image}
             information={item.information}
             key={item._id}
+            isPublished={item.isPublished}
           />
         ))
       )}

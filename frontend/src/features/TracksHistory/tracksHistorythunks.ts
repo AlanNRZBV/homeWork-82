@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { GetTrackHistoryResponse } from '../../types';
+import { TrackHistory } from '../../types';
 import axiosApi from '../../axiosApi.ts';
 import { RootState } from '../../app/store.ts';
 
 export const fetchTrackHistory = createAsyncThunk<
-  GetTrackHistoryResponse[] | undefined,
+  TrackHistory[] | undefined,
   undefined,
   { state: RootState }
 >('trackHistory/fetch', async (_arg, { getState }) => {
@@ -24,7 +24,7 @@ export const fetchTrackHistory = createAsyncThunk<
 });
 
 export const addTrackToHistory = createAsyncThunk<
-  GetTrackHistoryResponse,
+  TrackHistory,
   string,
   { state: RootState }
 >('trackHistory/addHistory', async (arg, { getState }) => {

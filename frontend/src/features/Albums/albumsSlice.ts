@@ -1,29 +1,27 @@
-import { Album, AlbumAndTrackData } from '../../types';
+import { Album } from '../../types';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store.ts';
-import { fetchAlbumsByArtist, fetchExtendedAlbum } from './albumsThunks.ts';
+import { fetchAlbumsByArtist, fetchSingleAlbum } from './albumsThunks.ts';
 
 interface AlbumState {
   albums: Album[];
-  albumExtended: AlbumAndTrackData
+  singleAlbum: Album;
   isLoading: boolean;
-  isExtendedAlbumLoading: boolean
+  isSingleAlbumLoading: boolean;
 }
 
 const initialState: AlbumState = {
   albums:[],
-  albumExtended:{
-    album:{
-      _id:'',
-      releaseDate:'',
-      title:'',
-      cover:'',
-      artistId:''
-    },
-    tracks:[]
+  singleAlbum:{
+    _id:'',
+    releaseDate:'',
+    title:'',
+    cover:'',
+    artistId:'',
+    isPublished:false
   },
   isLoading: false,
-  isExtendedAlbumLoading:false
+  isSingleAlbumLoading:false
 };
 
 export const albumsSlice = createSlice({
@@ -43,23 +41,21 @@ export const albumsSlice = createSlice({
     builder.addCase(fetchAlbumsByArtist.rejected, (state) => {
       state.isLoading = false;
     });
-    builder.addCase(fetchExtendedAlbum.pending, (state) => {
-      state.isExtendedAlbumLoading = true;
+    builder.addCase(fetchSingleAlbum.pending, (state) => {
+      state.isSingleAlbumLoading = true;
     });
-    builder.addCase(fetchExtendedAlbum.fulfilled, (state, { payload: extended}) => {
-      state.isExtendedAlbumLoading = false;
-      if(extended){
-        state.albumExtended = extended
-      }
+    builder.addCase(fetchSingleAlbum.fulfilled, (state, { payload: album}) => {
+      state.isSingleAlbumLoading = false;
+      state.singleAlbum = album
     });
-    builder.addCase(fetchExtendedAlbum.rejected, (state) => {
-      state.isExtendedAlbumLoading = false;
+    builder.addCase(fetchSingleAlbum.rejected, (state) => {
+      state.isSingleAlbumLoading = false;
     });
   },
 });
 
 export const albumsReducer = albumsSlice.reducer;
 export const albumsState = (state: RootState) => state.albums.albums;
-export const albumExtendedState = (state: RootState) => state.albums.albumExtended;
+export const albumState = (state: RootState) => state.albums.singleAlbum;
 export const isAlbumsLoading = (state: RootState) => state.albums.isLoading;
-export const isExtendedAlbumsLoading = (state: RootState) => state.albums.isExtendedAlbumLoading;
+export const isAlbumLoading = (state: RootState) => state.albums.isSingleAlbumLoading;

@@ -12,8 +12,9 @@ import {
   REHYDRATE,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { tracksHistoryReducer } from '../features/Tracks/tracksHistorySlice.ts';
+import { tracksHistoryReducer } from '../features/TracksHistory/tracksHistorySlice.ts';
 import { albumsReducer } from '../features/Albums/albumsSlice.ts';
+import { tracksReducer } from '../features/Tracks/tracksSlice.ts';
 
 const usersPersistConfig = {
   key: 'spotify:users',
@@ -24,6 +25,7 @@ const usersPersistConfig = {
 const rootReducer = combineReducers({
   artists: artistsReducer,
   albums: albumsReducer,
+  tracks: tracksReducer,
   tracksHistory: tracksHistoryReducer,
   users: persistReducer(usersPersistConfig, usersReducer),
 });

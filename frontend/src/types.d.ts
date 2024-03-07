@@ -3,6 +3,7 @@ export interface Artist {
   name: string;
   image: string | null;
   information: string;
+  isPublished?: boolean
 }
 
 type ArtistOnlyName = Omit<Artist, 'image', 'information'>;
@@ -13,6 +14,7 @@ export interface Album {
   artistId?: ArtistOnlyName;
   cover: string | null;
   releaseDate: string;
+  isPublished?: boolean
 }
 
 export interface Track {
@@ -21,12 +23,16 @@ export interface Track {
   albumId: string;
   duration: string;
   position: string;
+  isPublished?: boolean
 }
 
-export interface AlbumAndTrackData {
-  album: Album;
-  tracks: Track[];
+export interface TrackReduced {
+  _id: string;
+  title: string;
+  duration: string;
+  isPublished: boolean
 }
+
 export interface RegisterMutation {
   username: string;
   password: string;
@@ -41,6 +47,7 @@ export interface User {
   _id: string;
   username: string;
   token: string;
+  role:string
 }
 
 export interface ValidationError {
@@ -66,9 +73,8 @@ export interface RegisterResponse {
   user: User
 }
 
-export interface GetTrackHistoryResponse {
-  _id: string;
-  userId: {username:string}
+export interface TrackHistory {
+  _id?: string;
   trackId: {_id: string, title: string};
   datetime:string
 }

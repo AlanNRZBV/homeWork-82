@@ -1,15 +1,15 @@
-import { GetTrackHistoryResponse } from '../../types';
+import { TrackHistory } from '../../types';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store.ts';
 import { fetchTrackHistory } from './tracksHistorythunks.ts';
 
 interface TracksHistoryState {
-  history: GetTrackHistoryResponse[];
+  trackHistory: TrackHistory[];
   isLoading: boolean;
 }
 
 const initialState: TracksHistoryState = {
-  history: [],
+  trackHistory: [],
   isLoading: false,
 };
 
@@ -23,7 +23,7 @@ export const tracksHistorySlice = createSlice({
     });
     builder.addCase(fetchTrackHistory.fulfilled, (state,{payload: history}) => {
       if(history){
-        state.history = history
+        state.trackHistory = history
       }
       state.isLoading = false;
     });
@@ -34,6 +34,6 @@ export const tracksHistorySlice = createSlice({
 });
 
 export const tracksHistoryReducer = tracksHistorySlice.reducer;
-export const historyState = (state: RootState) => state.tracksHistory.history;
+export const historyState = (state: RootState) => state.tracksHistory.trackHistory;
 export const trackHistoryLoading = (state: RootState) =>
   state.tracksHistory.isLoading;

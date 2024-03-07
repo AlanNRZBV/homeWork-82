@@ -38,6 +38,7 @@ const Albums = () => {
             title={item.title}
             cover={item.cover}
             releaseDate={item.releaseDate}
+            isPublished={item.isPublished}
             key={item._id}
           />
         ))
