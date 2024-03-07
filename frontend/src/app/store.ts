@@ -1,6 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { artistsReducer } from '../features/Artists/artistsSlice.ts';
-import { artistReducer } from '../features/Artist/artistSlice.ts';
 import { usersReducer } from '../features/Users/usersSlice.ts';
 import {
   FLUSH,
@@ -24,7 +23,6 @@ const usersPersistConfig = {
 
 const rootReducer = combineReducers({
   artists: artistsReducer,
-  artist: artistReducer,
   albums: albumsReducer,
   tracksHistory: tracksHistoryReducer,
   users: persistReducer(usersPersistConfig, usersReducer),

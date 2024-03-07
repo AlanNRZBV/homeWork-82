@@ -29,7 +29,7 @@ const CustomListItem: FC<Props> = ({ title, duration, _id }) => {
       </IconButton>
       <Box display="flex" alignItems="center" sx={{flexGrow:'1'}}>
         <Typography  sx={{marginRight:"auto"}}>{title}</Typography>
-        <Typography variant="body2" color="grey" mr={2}>{duration}</Typography>
+        <Typography variant="body2" color="grey" ml={2} mr={2}>{duration}</Typography>
       </Box>
     </li>
   );
