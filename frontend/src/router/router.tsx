@@ -6,6 +6,7 @@ import Login from '../features/Users/Login.tsx';
 import Register from '../features/Users/Register.tsx';
 import TracksHistory from '../features/TracksHistory/TracksHistory.tsx';
 import AlbumExtended from '../features/Albums/AlbumExtended.tsx';
+import NotFound from '../components/UI/NotFound/NotFound.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,9 @@ export const router = createBrowserRouter([
       {
         path: '/track-history',
         element: <TracksHistory />,
+      },{
+        path: '*',
+        element: <NotFound />,
       },
     ],
   },
