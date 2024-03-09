@@ -11,7 +11,7 @@ import artistsRouter from './artists';
 
 const albumsRouter = Router();
 
-albumsRouter.post('/',auth, imagesUpload.single('cover'), async (req, res, next) => {
+albumsRouter.post('/new',auth, imagesUpload.single('cover'), async (req, res, next) => {
   try {
     const albumData: IAlbum = {
       title: req.body.title,

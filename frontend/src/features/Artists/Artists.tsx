@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../app/hooks.ts';
-import { artistsLoading, artistsState } from './artistsSlice.ts';
+import { artistsState, isArtistsLoading } from './artistsSlice.ts';
 import { Box, CircularProgress } from '@mui/material';
 import ArtistsItem from './components/ArtistsItem.tsx';
 import { useEffect } from 'react';
@@ -8,7 +8,7 @@ import { fetchArtists } from './artistsThunks.ts';
 const Artists = () => {
   const dispatch = useAppDispatch();
   const artists = useAppSelector(artistsState);
-  const isLoading = useAppSelector(artistsLoading);
+  const isLoading = useAppSelector(isArtistsLoading);
 
   useEffect(() => {
     dispatch(fetchArtists());
@@ -18,7 +18,11 @@ const Artists = () => {
     <Box
       mt={2}
       gap={2}
-      style={{display:'grid',gridTemplateColumns:'repeat(6,1fr)',gridTemplateRows:'repeat(auto,1fr)'}}
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(6,1fr)',
+        gridTemplateRows: 'repeat(auto,1fr)',
+      }}
     >
       {isLoading ? (
         <CircularProgress />

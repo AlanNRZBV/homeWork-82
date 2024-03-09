@@ -8,6 +8,7 @@ import AlbumExtended from '../features/Albums/AlbumExtended.tsx';
 import NotFound from '../components/UI/NotFound/NotFound.tsx';
 import AlbumsForm from '../features/Albums/components/AlbumsForm.tsx';
 import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute.tsx';
+import ArtistsForm from '../features/Artists/components/ArtistsForm.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,14 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <Artists />,
+      },
+      {
+        path: '/artists/new',
+        element: (
+          <ProtectedRoute>
+            <ArtistsForm/>
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/albums/:id',

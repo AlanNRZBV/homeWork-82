@@ -1,11 +1,14 @@
-import { Moment } from 'moment';
-
 export interface Artist {
   _id: string;
   name: string;
   image: string | null;
   information: string;
   isPublished?: boolean
+}
+export interface ArtistMutation {
+  name: string,
+  image: File | null,
+  information: string,
 }
 
 type ArtistOnlyName = Omit<Artist, 'image', 'information'>;

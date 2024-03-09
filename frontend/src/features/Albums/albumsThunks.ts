@@ -40,7 +40,7 @@ export const submitAlbum = createAsyncThunk<null, AlbumMutation, {state: RootSta
           formData.append(key, value);
         }
       });
-      const response = await axiosApi.post('/albums', formData, {headers:{
+      const response = await axiosApi.post('/albums/new', formData, {headers:{
         Authorization:'Bearer ' + token
         }});
       return response.data;

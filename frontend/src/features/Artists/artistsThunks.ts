@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosApi from '../../axiosApi.ts';
-import { Artist } from '../../types';
+import { Artist, ArtistMutation } from '../../types';
+import { RootState } from '../../app/store.ts';
 
 export const fetchArtists = createAsyncThunk<Artist[] | undefined>(
   'artists/fetch',
@@ -10,6 +11,28 @@ export const fetchArtists = createAsyncThunk<Artist[] | undefined>(
       return response.data;
     } catch (e) {
       console.log('Caught on try - FETCH ARTISTS - ', e);
+    }
+  },
+);
+export const submitArtist = createAsyncThunk<null, ArtistMutation, {state: RootState}>(
+  'albums/submit',
+  async (arg,{getState}) => {
+    try {
+      const token = getState().users.user?.token
+      const formData = new FormData();
+      const keys = Object.keys(arg) as (keyof ArtistMutation)[];
+      keys.forEach((key) => {
+        const value = arg[key];
+        if (value !== null) {
+          formData.append(key, value);
+        }
+      });
+      const response = await axiosApi.post('/artists', formData, {headers:{
+          Authorization:'Bearer ' + token
+        }});
+      return response.data;
+    } catch (e) {
+      console.log('Caught on try - SUBMIT ALBUM - ', e);
     }
   },
 );
