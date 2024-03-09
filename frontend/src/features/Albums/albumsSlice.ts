@@ -1,13 +1,14 @@
 import { Album } from '../../types';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store.ts';
-import { fetchAlbumsByArtist, fetchSingleAlbum } from './albumsThunks.ts';
+import { fetchAlbumsByArtist, fetchSingleAlbum, submitAlbum } from './albumsThunks.ts';
 
 interface AlbumState {
   albums: Album[];
   singleAlbum: Album;
   isLoading: boolean;
   isSingleAlbumLoading: boolean;
+  isSingleAlbumSubmitting: boolean
 }
 
 const initialState: AlbumState = {
@@ -21,7 +22,8 @@ const initialState: AlbumState = {
     isPublished:false
   },
   isLoading: false,
-  isSingleAlbumLoading:false
+  isSingleAlbumLoading:false,
+  isSingleAlbumSubmitting: false
 };
 
 export const albumsSlice = createSlice({
@@ -51,6 +53,16 @@ export const albumsSlice = createSlice({
     builder.addCase(fetchSingleAlbum.rejected, (state) => {
       state.isSingleAlbumLoading = false;
     });
+    builder.addCase(submitAlbum.pending, (state)=>{
+      state.isSingleAlbumSubmitting = true
+    })
+    builder.addCase(submitAlbum.fulfilled, (state)=>{
+      state.isSingleAlbumSubmitting = false
+    })
+    builder.addCase(submitAlbum.rejected, (state)=>{
+      state.isSingleAlbumSubmitting = false
+    })
+
   },
 });
 
@@ -59,3 +71,4 @@ export const albumsState = (state: RootState) => state.albums.albums;
 export const albumState = (state: RootState) => state.albums.singleAlbum;
 export const isAlbumsLoading = (state: RootState) => state.albums.isLoading;
 export const isAlbumLoading = (state: RootState) => state.albums.isSingleAlbumLoading;
+export const isAlbumSubmitting = (state: RootState) => state.albums.isSingleAlbumSubmitting;

@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -18,10 +17,13 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { fetchArtists } from '../../Artists/artistsThunks.ts';
 import { Moment } from 'moment';
 import { submitAlbum } from '../albumsThunks.ts';
+import { isAlbumSubmitting } from '../albumsSlice.ts';
+import { LoadingButton } from '@mui/lab';
 
 const AlbumsForm = () => {
   const dispatch = useAppDispatch();
   const artists = useAppSelector(artistsState);
+  const isUploading = useAppSelector(isAlbumSubmitting);
 
   const [state, setState] = useState<AlbumMutation>({
     cover: null,
@@ -38,16 +40,14 @@ const AlbumsForm = () => {
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      console.log(state)
       await dispatch(submitAlbum(state)).unwrap();
-      // await dispatch(fetchListings());
       setState({
         cover: null,
         title: '',
         artistId: '',
         releaseDate: '',
       });
-      setValue(null)
+      setValue(null);
     } catch (e) {
       console.log('Caught on try - SUBMIT FORM - ', e);
     }
@@ -79,13 +79,12 @@ const AlbumsForm = () => {
 
   const dateInputChangeHandler = (newValue: Moment | null) => {
     setValue(newValue);
-    if(newValue){
-    setState(prevState => ({
-      ...prevState,
-      releaseDate: newValue?.toISOString()
-    }))
+    if (newValue) {
+      setState((prevState) => ({
+        ...prevState,
+        releaseDate: newValue?.toISOString(),
+      }));
     }
-
   };
 
   return (
@@ -153,13 +152,15 @@ const AlbumsForm = () => {
           name="cover"
           onChange={fileInputChangeHandler}
         />
-        <Button
+        <LoadingButton
           type="submit"
           variant="contained"
           sx={{ marginTop: '16px', alignSelf: 'center' }}
+          disabled={isUploading}
+          loading={isUploading}
         >
           Submit
-        </Button>
+        </LoadingButton>
       </Box>
     </>
   );
