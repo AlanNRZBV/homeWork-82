@@ -10,7 +10,7 @@ export interface IArtist {
 export interface IAlbum {
   title: string;
   artistId: string;
-  releaseDate: string;
+  releaseDate: number;
   cover: string | null;
 }
 

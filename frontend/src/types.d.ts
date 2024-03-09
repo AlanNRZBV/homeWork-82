@@ -1,3 +1,5 @@
+import { Moment } from 'moment';
+
 export interface Artist {
   _id: string;
   name: string;
@@ -15,6 +17,12 @@ export interface Album {
   cover: string | null;
   releaseDate: string;
   isPublished?: boolean
+}
+export interface AlbumMutation {
+  title: string,
+  artistId: string,
+  cover: File | null,
+  releaseDate: string
 }
 
 export interface Track {

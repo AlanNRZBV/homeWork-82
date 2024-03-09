@@ -3,10 +3,11 @@ import Layout from '../layout/layout.tsx';
 import Artists from '../features/Artists/Artists.tsx';
 import Albums from '../features/Albums/Albums.tsx';
 import Login from '../features/Users/Login.tsx';
-import Register from '../features/Users/Register.tsx';
 import TracksHistory from '../features/TracksHistory/TracksHistory.tsx';
 import AlbumExtended from '../features/Albums/AlbumExtended.tsx';
 import NotFound from '../components/UI/NotFound/NotFound.tsx';
+import AlbumsForm from '../features/Albums/components/AlbumsForm.tsx';
+import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -25,9 +26,14 @@ export const router = createBrowserRouter([
         path: '/album-extended/:id',
         element: <AlbumExtended />,
       },
+
       {
-        path: '/register',
-        element: <Register />,
+        path: '/albums/new',
+        element: (
+          <ProtectedRoute>
+            <AlbumsForm />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/login',
@@ -36,7 +42,8 @@ export const router = createBrowserRouter([
       {
         path: '/track-history',
         element: <TracksHistory />,
-      },{
+      },
+      {
         path: '*',
         element: <NotFound />,
       },

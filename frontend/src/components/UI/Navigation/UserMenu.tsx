@@ -33,6 +33,7 @@ const UserMenu: React.FC<Props> = ({user}) => {
       </Button>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose} keepMounted>
         <MenuItem to="/track-history" component={NavLink}>Track History</MenuItem>
+        <MenuItem to="/albums/new" component={NavLink}>Add album</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </>

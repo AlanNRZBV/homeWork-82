@@ -16,7 +16,7 @@ albumsRouter.post('/',auth, imagesUpload.single('cover'), async (req, res, next)
     const albumData: IAlbum = {
       title: req.body.title,
       artistId: req.body.artistId,
-      releaseDate: req.body.releaseDate,
+      releaseDate: parseInt(req.body.releaseDate.slice(0,4)),
       cover: req.file ? req.file.filename : null,
     };
 
