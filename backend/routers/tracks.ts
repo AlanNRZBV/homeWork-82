@@ -10,12 +10,13 @@ import albumsRouter from './albums';
 
 const tracksRouter = Router();
 
-tracksRouter.post('/',auth, async (req, res, next) => {
+tracksRouter.post('/new',auth, async (req, res, next) => {
   try {
     const trackData: ITrack = {
       title: req.body.title,
       albumId: req.body.albumId,
       duration: req.body.duration,
+      position: req.body.position
     };
 
     const track = new Track(trackData);

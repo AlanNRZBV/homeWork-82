@@ -15,7 +15,7 @@ export const fetchArtists = createAsyncThunk<Artist[] | undefined>(
   },
 );
 export const submitArtist = createAsyncThunk<null, ArtistMutation, {state: RootState}>(
-  'albums/submit',
+  'artists/submit',
   async (arg,{getState}) => {
     try {
       const token = getState().users.user?.token
@@ -27,12 +27,12 @@ export const submitArtist = createAsyncThunk<null, ArtistMutation, {state: RootS
           formData.append(key, value);
         }
       });
-      const response = await axiosApi.post('/artists', formData, {headers:{
+      const response = await axiosApi.post('/artists/new', formData, {headers:{
           Authorization:'Bearer ' + token
         }});
       return response.data;
     } catch (e) {
-      console.log('Caught on try - SUBMIT ALBUM - ', e);
+      console.log('Caught on try - SUBMIT ARTIST - ', e);
     }
   },
 );

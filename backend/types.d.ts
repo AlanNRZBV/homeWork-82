@@ -17,7 +17,8 @@ export interface IAlbum {
 export interface ITrack {
   title: string;
   albumId: string;
-  duration: string | null;
+  duration: string;
+  position: string
 }
 
 export interface AlbumWithTrackCount {

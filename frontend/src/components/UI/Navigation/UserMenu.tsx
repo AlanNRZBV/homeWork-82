@@ -35,6 +35,7 @@ const UserMenu: React.FC<Props> = ({user}) => {
         <MenuItem to="/track-history" component={NavLink}>Track History</MenuItem>
         <MenuItem to="/albums/new" component={NavLink}>Add album</MenuItem>
         <MenuItem to="/artists/new" component={NavLink}>Add artist</MenuItem>
+        <MenuItem to="/tracks/new" component={NavLink}>Add track</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </>

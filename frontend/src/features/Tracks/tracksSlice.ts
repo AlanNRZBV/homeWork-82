@@ -5,12 +5,14 @@ import { fetchTracksByAlbum } from './tracksThunks.ts';
 
 interface TracksState{
   tracks:TrackReduced[]
-  isLoading: boolean
+  isLoading: boolean,
+  isUploading: boolean
 }
 
 const initialState: TracksState = {
   tracks:[],
-  isLoading:false
+  isLoading:false,
+  isUploading:false
 }
 
 export const tracksSlice = createSlice({
@@ -33,3 +35,4 @@ export const tracksSlice = createSlice({
 export const tracksReducer = tracksSlice.reducer
 export const tracksState = (state: RootState)=>state.tracks.tracks
 export const isTracksLoading = (state: RootState)=>state.tracks.isLoading
+export const isTracksUploading = (state: RootState)=>state.tracks.isUploading

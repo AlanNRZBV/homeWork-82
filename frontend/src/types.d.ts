@@ -28,15 +28,12 @@ export interface AlbumMutation {
   releaseDate: string
 }
 
-export interface Track {
-  _id: string;
+export interface TrackMutation {
   title: string;
   albumId: string;
-  duration: string;
-  position: string;
-  isPublished?: boolean
+  duration: number;
+  position: number;
 }
-
 export interface TrackReduced {
   _id: string;
   title: string;

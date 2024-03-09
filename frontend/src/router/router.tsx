@@ -9,6 +9,7 @@ import NotFound from '../components/UI/NotFound/NotFound.tsx';
 import AlbumsForm from '../features/Albums/components/AlbumsForm.tsx';
 import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute.tsx';
 import ArtistsForm from '../features/Artists/components/ArtistsForm.tsx';
+import TracksForm from '../features/Tracks/components/TracksForm.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,13 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <AlbumsForm />
+          </ProtectedRoute>
+        ),
+      },{
+        path: '/tracks/new',
+        element: (
+          <ProtectedRoute>
+            <TracksForm/>
           </ProtectedRoute>
         ),
       },

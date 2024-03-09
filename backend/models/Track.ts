@@ -20,6 +20,7 @@ const TrackSchema = new Schema({
   },
   duration: {
     type: String,
+    required: true
   },
   position: {
     type: Number,
