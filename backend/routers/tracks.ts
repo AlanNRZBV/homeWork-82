@@ -10,13 +10,13 @@ import albumsRouter from './albums';
 
 const tracksRouter = Router();
 
-tracksRouter.post('/new',auth, async (req, res, next) => {
+tracksRouter.post('/new', auth, async (req, res, next) => {
   try {
     const trackData: ITrack = {
       title: req.body.title,
       albumId: req.body.albumId,
       duration: req.body.duration,
-      position: req.body.position
+      position: req.body.position,
     };
 
     const track = new Track(trackData);
@@ -63,23 +63,23 @@ tracksRouter.get('/', async (req, res, next) => {
   }
 });
 
-tracksRouter.delete('/:id', auth,permit('admin'),async(req:RequestWithUser,res,next)=>{
-  if(req.user && req.user.role !== 'admin'){
-    return res.status(403).send({error:'not authorized'})
+tracksRouter.delete('/:id', auth, permit('admin'), async (req: RequestWithUser, res, next) => {
+  if (req.user && req.user.role !== 'admin') {
+    return res.status(403).send({ error: 'not authorized' });
   }
 
   try {
-    const trackId = req.params.id
-    const trackCheck = await Track.findById(trackId)
-    if(!trackCheck){
-      return res.send({error:'No track found'})
+    const trackId = req.params.id;
+    const trackCheck = await Track.findById(trackId);
+    if (!trackCheck) {
+      return res.send({ error: 'No track found' });
     }
-    await Track.deleteOne({_id:trackId})
-    return res.send({message:'Track successfully deleted'})
-  }catch (e) {
-    next(e)
+    await Track.deleteOne({ _id: trackId });
+    return res.send({ message: 'Track successfully deleted' });
+  } catch (e) {
+    next(e);
   }
-})
+});
 tracksRouter.patch('/:id/togglePublished', auth, permit('admin'), async (req: RequestWithUser, res, next) => {
   if (req.user && req.user.role !== 'admin') {
     return res.status(403).send({ error: 'not authorized' });
@@ -91,8 +91,12 @@ tracksRouter.patch('/:id/togglePublished', auth, permit('admin'), async (req: Re
       return res.send({ error: 'No artist found' });
     }
 
-    const artistToBePublished = await Track.findOneAndUpdate({ _id: trackId }, { isPublished: !trackCheck.isPublished }, { new: true });
-    return res.send(artistToBePublished)
+    const artistToBePublished = await Track.findOneAndUpdate(
+      { _id: trackId },
+      { isPublished: !trackCheck.isPublished },
+      { new: true },
+    );
+    return res.send(artistToBePublished);
   } catch (e) {
     next(e);
   }

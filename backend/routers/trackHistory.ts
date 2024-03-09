@@ -32,10 +32,12 @@ trackHistoryRouter.get('/', auth, async (req: RequestWithUser, res, next) => {
   try {
     const user = req.user;
     const historyByUser = await TrackHistory.find({ userId: user?.id })
-      .populate([{ path: 'trackId', select: '_id, title' },
-    {path:'userId', select:'-_id, username'}])
+      .populate([
+        { path: 'trackId', select: '_id, title' },
+        { path: 'userId', select: '-_id, username' },
+      ])
       .sort({ datetime: -1 });
-    return res.send( historyByUser );
+    return res.send(historyByUser);
   } catch (e) {
     next(e);
   }

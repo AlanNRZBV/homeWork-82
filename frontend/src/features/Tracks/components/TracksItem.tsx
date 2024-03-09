@@ -6,11 +6,14 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks.ts';
 import { TrackReduced } from '../../../types';
 import { addTrackToHistory } from '../../TracksHistory/tracksHistorythunks.ts';
 
-
-const TracksItem: FC<TrackReduced> = ({ title, duration, _id,isPublished }) => {
+const TracksItem: FC<TrackReduced> = ({
+  title,
+  duration,
+  _id,
+  isPublished,
+}) => {
   const user = useAppSelector(selectUser);
-  const dispatch = useAppDispatch()
-
+  const dispatch = useAppDispatch();
 
   const clickHandler = async () => {
     if (_id) {
@@ -18,7 +21,7 @@ const TracksItem: FC<TrackReduced> = ({ title, duration, _id,isPublished }) => {
     }
   };
 
-  const disabledColor = 'lightgrey'
+  const disabledColor = 'lightgrey';
 
   return (
     <li
@@ -28,16 +31,26 @@ const TracksItem: FC<TrackReduced> = ({ title, duration, _id,isPublished }) => {
         justifyContent: 'space-between',
       }}
     >
-        <IconButton
-          onClick={clickHandler}
-          aria-label="delete"
-          disabled={user === null}
-        >
-          <PlayArrowIcon />
-        </IconButton>
+      <IconButton
+        onClick={clickHandler}
+        aria-label="delete"
+        disabled={user === null}
+      >
+        <PlayArrowIcon />
+      </IconButton>
       <Box display="flex" alignItems="center" sx={{ flexGrow: '1' }}>
-        <Typography sx={{ marginRight: 'auto' }} color={isPublished ? 'black' : disabledColor}>{title}</Typography>
-        <Typography variant="body2" color={isPublished ? 'grey' : disabledColor} ml={2} mr={2}>
+        <Typography
+          sx={{ marginRight: 'auto' }}
+          color={isPublished ? 'black' : disabledColor}
+        >
+          {title}
+        </Typography>
+        <Typography
+          variant="body2"
+          color={isPublished ? 'grey' : disabledColor}
+          ml={2}
+          mr={2}
+        >
           {duration}
         </Typography>
       </Box>

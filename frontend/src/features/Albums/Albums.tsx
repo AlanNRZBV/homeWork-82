@@ -7,17 +7,14 @@ import { useParams } from 'react-router-dom';
 import { fetchAlbumsByArtist } from './albumsThunks.ts';
 
 const Albums = () => {
-
-  const dispatch=useAppDispatch();
+  const dispatch = useAppDispatch();
   const albums = useAppSelector(albumsState);
   const isLoading = useAppSelector(isAlbumsLoading);
-  const artistId = useParams()
-
+  const artistId = useParams();
 
   useEffect(() => {
-    dispatch(fetchAlbumsByArtist(artistId.id as string))
+    dispatch(fetchAlbumsByArtist(artistId.id as string));
   }, [artistId.id, dispatch]);
-
 
   return (
     <Box

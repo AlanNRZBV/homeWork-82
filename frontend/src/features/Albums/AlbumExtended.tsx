@@ -18,7 +18,6 @@ const AlbumExtended = () => {
 
   let cardImage = imageNotAvailable;
 
-
   if (state.cover) {
     cardImage = apiURL + '/' + state.cover;
   }

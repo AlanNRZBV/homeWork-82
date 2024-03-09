@@ -11,12 +11,12 @@ import artistsRouter from './artists';
 
 const albumsRouter = Router();
 
-albumsRouter.post('/new',auth, imagesUpload.single('cover'), async (req, res, next) => {
+albumsRouter.post('/new', auth, imagesUpload.single('cover'), async (req, res, next) => {
   try {
     const albumData: IAlbum = {
       title: req.body.title,
       artistId: req.body.artistId,
-      releaseDate: parseInt(req.body.releaseDate.slice(0,4)),
+      releaseDate: parseInt(req.body.releaseDate.slice(0, 4)),
       cover: req.file ? req.file.filename : null,
     };
 
@@ -41,7 +41,7 @@ albumsRouter.get('/:id', async (req, res, next) => {
       return res.status(404).send({ error: 'Wrong ObjectId!' });
     }
 
-    const album = await Album.findById(_id).populate({path:'artistId', select:'-_id, name'});
+    const album = await Album.findById(_id).populate({ path: 'artistId', select: '-_id, name' });
 
     if (!album) {
       return res.status(404).send({ error: 'Not found!' });
@@ -71,23 +71,23 @@ albumsRouter.get('/', async (req, res, next) => {
   }
 });
 
-albumsRouter.delete('/:id', auth,permit('admin'),async(req:RequestWithUser,res,next)=>{
-  if(req.user && req.user.role !== 'admin'){
-    return res.status(403).send({error:'not authorized'})
+albumsRouter.delete('/:id', auth, permit('admin'), async (req: RequestWithUser, res, next) => {
+  if (req.user && req.user.role !== 'admin') {
+    return res.status(403).send({ error: 'not authorized' });
   }
 
   try {
-    const albumId = req.params.id
-    const albumCheck = await Album.findById(albumId)
-    if(!albumCheck){
-      return res.send({error:'No album found'})
+    const albumId = req.params.id;
+    const albumCheck = await Album.findById(albumId);
+    if (!albumCheck) {
+      return res.send({ error: 'No album found' });
     }
-    await Album.deleteOne({_id:albumId})
-    return res.send({message:'Album successfully deleted'})
-  }catch (e) {
-    next(e)
+    await Album.deleteOne({ _id: albumId });
+    return res.send({ message: 'Album successfully deleted' });
+  } catch (e) {
+    next(e);
   }
-})
+});
 
 albumsRouter.patch('/:id/togglePublished', auth, permit('admin'), async (req: RequestWithUser, res, next) => {
   if (req.user && req.user.role !== 'admin') {
@@ -100,8 +100,12 @@ albumsRouter.patch('/:id/togglePublished', auth, permit('admin'), async (req: Re
       return res.send({ error: 'No artist found' });
     }
 
-    const artistToBePublished = await Album.findOneAndUpdate({ _id: albumId }, { isPublished: !albumCheck.isPublished }, { new: true });
-    return res.send(artistToBePublished)
+    const artistToBePublished = await Album.findOneAndUpdate(
+      { _id: albumId },
+      { isPublished: !albumCheck.isPublished },
+      { new: true },
+    );
+    return res.send(artistToBePublished);
   } catch (e) {
     next(e);
   }

@@ -3,36 +3,40 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store.ts';
 import { fetchTracksByAlbum } from './tracksThunks.ts';
 
-interface TracksState{
-  tracks:TrackReduced[]
-  isLoading: boolean,
-  isUploading: boolean
+interface TracksState {
+  tracks: TrackReduced[];
+  isLoading: boolean;
+  isUploading: boolean;
 }
 
 const initialState: TracksState = {
-  tracks:[],
-  isLoading:false,
-  isUploading:false
-}
+  tracks: [],
+  isLoading: false,
+  isUploading: false,
+};
 
 export const tracksSlice = createSlice({
-  name:'tracks',
+  name: 'tracks',
   initialState,
-  reducers:{},extraReducers:builder => {
-    builder.addCase(fetchTracksByAlbum.pending, (state)=>{
-      state.isLoading = true
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchTracksByAlbum.pending, (state) => {
+      state.isLoading = true;
     });
-    builder.addCase(fetchTracksByAlbum.fulfilled, (state,{payload:tracks})=>{
-      state.isLoading = false
-      state.tracks = tracks
+    builder.addCase(
+      fetchTracksByAlbum.fulfilled,
+      (state, { payload: tracks }) => {
+        state.isLoading = false;
+        state.tracks = tracks;
+      },
+    );
+    builder.addCase(fetchTracksByAlbum.rejected, (state) => {
+      state.isLoading = false;
     });
-    builder.addCase(fetchTracksByAlbum.rejected, (state)=>{
-      state.isLoading = false
-    });
-  }
-})
+  },
+});
 
-export const tracksReducer = tracksSlice.reducer
-export const tracksState = (state: RootState)=>state.tracks.tracks
-export const isTracksLoading = (state: RootState)=>state.tracks.isLoading
-export const isTracksUploading = (state: RootState)=>state.tracks.isUploading
+export const tracksReducer = tracksSlice.reducer;
+export const tracksState = (state: RootState) => state.tracks.tracks;
+export const isTracksLoading = (state: RootState) => state.tracks.isLoading;
+export const isTracksUploading = (state: RootState) => state.tracks.isUploading;

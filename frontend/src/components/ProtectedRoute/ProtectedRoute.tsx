@@ -5,11 +5,10 @@ import { selectUser } from '../../features/Users/usersSlice.ts';
 
 interface Props extends React.PropsWithChildren {}
 
-const ProtectedRoute:FC<Props> = ({children}) => {
-
-  const user = useAppSelector(selectUser)
-  if(!user){
-    return <Navigate to="/login"/>;
+const ProtectedRoute: FC<Props> = ({ children }) => {
+  const user = useAppSelector(selectUser);
+  if (!user) {
+    return <Navigate to="/login" />;
   }
   return children;
 };

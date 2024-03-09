@@ -28,10 +28,7 @@ const TracksForm = () => {
   const albums = useAppSelector(albumsState);
   const isUploading = useAppSelector(isTracksUploading);
 
-
-  const [artistSelected, setArtistSelected]=useState<string>(
-    ''
-  )
+  const [artistSelected, setArtistSelected] = useState<string>('');
   const [state, setState] = useState<TrackMutation>({
     title: '',
     albumId: '',
@@ -44,8 +41,8 @@ const TracksForm = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if(artistSelected !== ''){
-    dispatch(fetchAlbumsByArtist(artistSelected))
+    if (artistSelected !== '') {
+      dispatch(fetchAlbumsByArtist(artistSelected));
     }
   }, [artistSelected, artists, dispatch]);
 
@@ -59,7 +56,7 @@ const TracksForm = () => {
         duration: 0,
         position: 0,
       });
-      setArtistSelected('')
+      setArtistSelected('');
     } catch (e) {
       console.log('Caught on try - SUBMIT FORM - ', e);
     }
@@ -72,7 +69,7 @@ const TracksForm = () => {
     });
   };
   const artistChangeHandler = async (e: SelectChangeEvent) => {
-    setArtistSelected(e.target.value)
+    setArtistSelected(e.target.value);
   };
 
   const selectChangeHandler = (e: SelectChangeEvent) => {
@@ -80,8 +77,6 @@ const TracksForm = () => {
       return { ...prevState, albumId: e.target.value };
     });
   };
-
-
 
   return (
     <>
@@ -152,7 +147,7 @@ const TracksForm = () => {
         </FormControl>
         <TextField
           type="number"
-          InputProps={{ inputProps: { min: 0, max: 20, step:'any'} }}
+          InputProps={{ inputProps: { min: 0, max: 20, step: 'any' } }}
           id="duration"
           label="Duration"
           value={state.duration}
@@ -163,7 +158,7 @@ const TracksForm = () => {
         />
         <TextField
           type="number"
-          InputProps={{ inputProps: { min: 0, max: 16} }}
+          InputProps={{ inputProps: { min: 0, max: 16 } }}
           id="position"
           label="Position"
           value={state.position}

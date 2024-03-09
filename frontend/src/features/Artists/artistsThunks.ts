@@ -14,25 +14,28 @@ export const fetchArtists = createAsyncThunk<Artist[] | undefined>(
     }
   },
 );
-export const submitArtist = createAsyncThunk<null, ArtistMutation, {state: RootState}>(
-  'artists/submit',
-  async (arg,{getState}) => {
-    try {
-      const token = getState().users.user?.token
-      const formData = new FormData();
-      const keys = Object.keys(arg) as (keyof ArtistMutation)[];
-      keys.forEach((key) => {
-        const value = arg[key];
-        if (value !== null) {
-          formData.append(key, value);
-        }
-      });
-      const response = await axiosApi.post('/artists/new', formData, {headers:{
-          Authorization:'Bearer ' + token
-        }});
-      return response.data;
-    } catch (e) {
-      console.log('Caught on try - SUBMIT ARTIST - ', e);
-    }
-  },
-);
+export const submitArtist = createAsyncThunk<
+  null,
+  ArtistMutation,
+  { state: RootState }
+>('artists/submit', async (arg, { getState }) => {
+  try {
+    const token = getState().users.user?.token;
+    const formData = new FormData();
+    const keys = Object.keys(arg) as (keyof ArtistMutation)[];
+    keys.forEach((key) => {
+      const value = arg[key];
+      if (value !== null) {
+        formData.append(key, value);
+      }
+    });
+    const response = await axiosApi.post('/artists/new', formData, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+    return response.data;
+  } catch (e) {
+    console.log('Caught on try - SUBMIT ARTIST - ', e);
+  }
+});

@@ -9,8 +9,8 @@ interface Props {
   user: User;
 }
 
-const UserMenu: React.FC<Props> = ({user}) => {
-  const dispatch=useAppDispatch()
+const UserMenu: React.FC<Props> = ({ user }) => {
+  const dispatch = useAppDispatch();
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
@@ -31,11 +31,24 @@ const UserMenu: React.FC<Props> = ({user}) => {
       <Button color="inherit" onClick={handleClick}>
         Hello, {user.username}!
       </Button>
-      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose} keepMounted>
-        <MenuItem to="/track-history" component={NavLink}>Track History</MenuItem>
-        <MenuItem to="/albums/new" component={NavLink}>Add album</MenuItem>
-        <MenuItem to="/artists/new" component={NavLink}>Add artist</MenuItem>
-        <MenuItem to="/tracks/new" component={NavLink}>Add track</MenuItem>
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+        keepMounted
+      >
+        <MenuItem to="/track-history" component={NavLink}>
+          Track History
+        </MenuItem>
+        <MenuItem to="/albums/new" component={NavLink}>
+          Add album
+        </MenuItem>
+        <MenuItem to="/artists/new" component={NavLink}>
+          Add artist
+        </MenuItem>
+        <MenuItem to="/tracks/new" component={NavLink}>
+          Add track
+        </MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </>

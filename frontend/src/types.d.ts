@@ -3,12 +3,12 @@ export interface Artist {
   name: string;
   image: string | null;
   information: string;
-  isPublished?: boolean
+  isPublished?: boolean;
 }
 export interface ArtistMutation {
-  name: string,
-  image: File | null,
-  information: string,
+  name: string;
+  image: File | null;
+  information: string;
 }
 
 type ArtistOnlyName = Omit<Artist, 'image', 'information'>;
@@ -19,13 +19,13 @@ export interface Album {
   artistId?: ArtistOnlyName;
   cover: string | null;
   releaseDate: string;
-  isPublished?: boolean
+  isPublished?: boolean;
 }
 export interface AlbumMutation {
-  title: string,
-  artistId: string,
-  cover: File | null,
-  releaseDate: string
+  title: string;
+  artistId: string;
+  cover: File | null;
+  releaseDate: string;
 }
 
 export interface TrackMutation {
@@ -38,7 +38,7 @@ export interface TrackReduced {
   _id: string;
   title: string;
   duration: string;
-  isPublished: boolean
+  isPublished: boolean;
 }
 
 export interface RegisterMutation {
@@ -55,7 +55,7 @@ export interface User {
   _id: string;
   username: string;
   token: string;
-  role:string
+  role: string;
 }
 
 export interface ValidationError {
@@ -63,9 +63,8 @@ export interface ValidationError {
     [key: string]: {
       name: string;
       message: string;
-    }
-  },
-
+    };
+  };
 }
 
 export interface RegisterResponse {
@@ -77,13 +76,12 @@ export interface GlobalError {
   error: string;
 }
 export interface RegisterResponse {
-  message: string
-  user: User
+  message: string;
+  user: User;
 }
 
 export interface TrackHistory {
   _id?: string;
-  trackId: {_id: string, title: string};
-  datetime:string
+  trackId: { _id: string; title: string };
+  datetime: string;
 }
-

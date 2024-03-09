@@ -14,18 +14,21 @@ export const fetchTracksByAlbum = createAsyncThunk<TrackReduced[], string>(
     }
   },
 );
-export const submitTrack = createAsyncThunk<null, TrackMutation, {state: RootState}>(
-  'tracks/submit',
-  async (arg,{getState}) => {
-    try {
-      const token = getState().users.user?.token
+export const submitTrack = createAsyncThunk<
+  null,
+  TrackMutation,
+  { state: RootState }
+>('tracks/submit', async (arg, { getState }) => {
+  try {
+    const token = getState().users.user?.token;
 
-      const response = await axiosApi.post('/tracks/new', arg, {headers:{
-          Authorization:'Bearer ' + token
-        }});
-      return response.data;
-    } catch (e) {
-      console.log('Caught on try - SUBMIT TRACK - ', e);
-    }
-  },
-);
+    const response = await axiosApi.post('/tracks/new', arg, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+    return response.data;
+  } catch (e) {
+    console.log('Caught on try - SUBMIT TRACK - ', e);
+  }
+});

@@ -8,8 +8,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
-
-
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <LocalizationProvider dateAdapter={AdapterMoment}>

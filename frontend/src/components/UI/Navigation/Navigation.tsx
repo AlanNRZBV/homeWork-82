@@ -29,11 +29,7 @@ const Navigation = () => {
           >
             Home
           </Button>
-          {user ? (
-            <UserMenu user={user} />
-          ) : (
-            <AnonymousMenu />
-          )}
+          {user ? <UserMenu user={user} /> : <AnonymousMenu />}
         </Box>
       </Toolbar>
     </AppBar>

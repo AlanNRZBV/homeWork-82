@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Box, Typography } from '@mui/material';
 import { TrackHistory } from '../../../types';
 
-const TracksHistoryItem: FC<TrackHistory> = ({datetime,trackId}) => {
+const TracksHistoryItem: FC<TrackHistory> = ({ datetime, trackId }) => {
   return (
     <li
       style={{

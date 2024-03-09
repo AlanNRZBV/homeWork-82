@@ -18,7 +18,7 @@ export interface ITrack {
   title: string;
   albumId: string;
   duration: string;
-  position: string
+  position: string;
 }
 
 export interface AlbumWithTrackCount {
@@ -36,7 +36,7 @@ export interface UserFields {
   username: string;
   password: string;
   token: string;
-  role:string
+  role: string;
 }
 
 export interface UserMethods {

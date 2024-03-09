@@ -6,13 +6,13 @@ import { fetchArtists, submitArtist } from './artistsThunks.ts';
 interface ArtistsState {
   artists: Artist[];
   isLoading: boolean;
-  isUploading: boolean
+  isUploading: boolean;
 }
 
 const initialState: ArtistsState = {
   artists: [],
   isLoading: false,
-  isUploading: false
+  isUploading: false,
 };
 
 const artistsSlice = createSlice({

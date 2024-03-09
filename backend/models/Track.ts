@@ -20,16 +20,17 @@ const TrackSchema = new Schema({
   },
   duration: {
     type: String,
-    required: true
+    required: true,
   },
   position: {
     type: Number,
     required: true,
-  },isPublished:{
-    type:Boolean,
-    required:true,
-    default:false
-  }
+  },
+  isPublished: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 const Track = model('Track', TrackSchema);

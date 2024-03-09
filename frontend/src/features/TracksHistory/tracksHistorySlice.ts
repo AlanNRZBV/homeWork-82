@@ -21,12 +21,15 @@ export const tracksHistorySlice = createSlice({
     builder.addCase(fetchTrackHistory.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(fetchTrackHistory.fulfilled, (state,{payload: history}) => {
-      if(history){
-        state.trackHistory = history
-      }
-      state.isLoading = false;
-    });
+    builder.addCase(
+      fetchTrackHistory.fulfilled,
+      (state, { payload: history }) => {
+        if (history) {
+          state.trackHistory = history;
+        }
+        state.isLoading = false;
+      },
+    );
     builder.addCase(fetchTrackHistory.rejected, (state) => {
       state.isLoading = true;
     });
@@ -34,6 +37,7 @@ export const tracksHistorySlice = createSlice({
 });
 
 export const tracksHistoryReducer = tracksHistorySlice.reducer;
-export const historyState = (state: RootState) => state.tracksHistory.trackHistory;
+export const historyState = (state: RootState) =>
+  state.tracksHistory.trackHistory;
 export const trackHistoryLoading = (state: RootState) =>
   state.tracksHistory.isLoading;

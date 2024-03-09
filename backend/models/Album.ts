@@ -24,11 +24,12 @@ const AlbumSchema = new Schema({
   },
   cover: {
     type: String,
-  },isPublished:{
-    type:Boolean,
-    required:true,
-    default:false
-  }
+  },
+  isPublished: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 const Album = model('Album', AlbumSchema);

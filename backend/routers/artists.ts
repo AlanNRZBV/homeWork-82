@@ -64,8 +64,12 @@ artistsRouter.patch('/:id/togglePublished', auth, permit('admin'), async (req: R
       return res.send({ error: 'No artist found' });
     }
 
-    const artistToBePublished = await Artist.findOneAndUpdate({ _id: artistId }, { isPublished: !artistCheck.isPublished }, { new: true });
-    return res.send(artistToBePublished)
+    const artistToBePublished = await Artist.findOneAndUpdate(
+      { _id: artistId },
+      { isPublished: !artistCheck.isPublished },
+      { new: true },
+    );
+    return res.send(artistToBePublished);
   } catch (e) {
     next(e);
   }

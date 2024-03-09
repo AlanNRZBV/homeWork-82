@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
         path: '/artists/new',
         element: (
           <ProtectedRoute>
-            <ArtistsForm/>
+            <ArtistsForm />
           </ProtectedRoute>
         ),
       },
@@ -44,11 +44,12 @@ export const router = createBrowserRouter([
             <AlbumsForm />
           </ProtectedRoute>
         ),
-      },{
+      },
+      {
         path: '/tracks/new',
         element: (
           <ProtectedRoute>
-            <TracksForm/>
+            <TracksForm />
           </ProtectedRoute>
         ),
       },

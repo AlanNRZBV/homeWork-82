@@ -27,25 +27,28 @@ export const fetchSingleAlbum = createAsyncThunk<Album, string>(
   },
 );
 
-export const submitAlbum = createAsyncThunk<null, AlbumMutation, {state: RootState}>(
-  'albums/submit',
-  async (arg,{getState}) => {
-    try {
-      const token = getState().users.user?.token
-      const formData = new FormData();
-      const keys = Object.keys(arg) as (keyof AlbumMutation)[];
-      keys.forEach((key) => {
-        const value = arg[key];
-        if (value !== null) {
-          formData.append(key, value);
-        }
-      });
-      const response = await axiosApi.post('/albums/new', formData, {headers:{
-        Authorization:'Bearer ' + token
-        }});
-      return response.data;
-    } catch (e) {
-      console.log('Caught on try - SUBMIT ALBUM - ', e);
-    }
-  },
-);
+export const submitAlbum = createAsyncThunk<
+  null,
+  AlbumMutation,
+  { state: RootState }
+>('albums/submit', async (arg, { getState }) => {
+  try {
+    const token = getState().users.user?.token;
+    const formData = new FormData();
+    const keys = Object.keys(arg) as (keyof AlbumMutation)[];
+    keys.forEach((key) => {
+      const value = arg[key];
+      if (value !== null) {
+        formData.append(key, value);
+      }
+    });
+    const response = await axiosApi.post('/albums/new', formData, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+    return response.data;
+  } catch (e) {
+    console.log('Caught on try - SUBMIT ALBUM - ', e);
+  }
+});

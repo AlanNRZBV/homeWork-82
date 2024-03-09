@@ -30,13 +30,13 @@ const run = async () => {
         username: 'user',
         password: '5str0ngPswrd',
         token: crypto.randomUUID(),
-        role:'client'
+        role: 'client',
       },
       {
         username: 'admin',
         password: '5str0ngPswrd',
         token: crypto.randomUUID(),
-        role:'admin'
+        role: 'admin',
       },
     ]);
 
@@ -47,21 +47,22 @@ const run = async () => {
           'NF raps with raw grit and emotional authenticity, born of a lifetime of taking hits and getting back up again. ' +
           'His intimate yet propulsive tracks received two consecutive No. 1 albums on the Billboard 200 with Perception and The Search. ',
         image: 'fixtures/artist_nf.jpg',
-        isPublished: true
+        isPublished: true,
       },
       {
         name: 'Shinedown',
         information:
           'Multi-platinum band Shinedown Brent Smith [vocals], Zach Myers [guitar], Eric Bass [bass, production], and Barry Kerch [drums] – have cemented their status as one of the most vital and forward-thinking powerhouses in modern rock. Their most ambitious and masterfully realized work to date, their seventh studio album Planet Zero firmly places the group in the pantheon of artists capable of moving the culture forward on the strength of their singular vision, uncompromising honesty, and fierce commitment to constant evolution. The record-breaking band have achieved astronomical success while embodying the kind of creative dynamism that defies expectation and transcends boundaries. They were named #1 on Billboard’s Greatest Of All Time Mainstream Rock Artists Chart, after notching the most ever #1s in the 40-year history of the Mainstream Rock Songs Chart with a string of consecutive #1 hit singles.',
         image: 'fixtures/artist_shinedown.jpg',
-        isPublished: true
+        isPublished: true,
       },
       {
-        name:"System Of a Down",
-        information:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        image:'fixtures/artist_soad.jpg',
-        isPublished: false
-      }
+        name: 'System Of a Down',
+        information:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        image: 'fixtures/artist_soad.jpg',
+        isPublished: false,
+      },
     ]);
 
     const artistNf = await Artist.findOne({ name: 'NF' });
@@ -74,35 +75,35 @@ const run = async () => {
         artistId: artistShinedown?._id,
         releaseDate: 2008,
         cover: 'fixtures/album_shinedown_sound_of_madness.jpeg',
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'Leave a Whisper',
         artistId: artistShinedown?._id,
         releaseDate: 2003,
         cover: 'fixtures/album_shinedown_leave_a_whisper.jpg',
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'Hope',
         artistId: artistNf?._id,
         releaseDate: 2023,
         cover: 'fixtures/album_nf_hope.png',
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'The Search',
         artistId: artistNf?._id,
         releaseDate: 2019,
         cover: 'fixtures/album_nf_search.png',
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'Toxicity',
         artistId: artistSoad?._id,
         releaseDate: 2001,
         cover: 'fixtures/album_soad_toxicity.jpeg',
-        isPublished: false
+        isPublished: false,
       },
     ]);
 
@@ -118,130 +119,133 @@ const run = async () => {
         albumId: nfTheSearch?._id,
         duration: '4:08',
         position: 1,
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'I Miss the Days',
         albumId: nfTheSearch?._id,
         duration: '4:29',
         position: 13,
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'When I Grow Up',
         albumId: nfTheSearch?._id,
         duration: '3:16',
         position: 8,
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'Change',
         albumId: nfTheSearch?._id,
         duration: '3:54',
         position: 3,
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'Hope',
         albumId: nfHope?._id,
         duration: '4:24',
         position: 1,
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'Motto',
         albumId: nfHope?._id,
         duration: '3:37',
         position: 2,
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'Happy',
         albumId: nfHope?._id,
         duration: '4:02',
         position: 5,
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'Careful',
         albumId: nfHope?._id,
         duration: '3:29',
         position: 3,
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'Devour',
         albumId: shinedownTheSoundOfMadness?._id,
         duration: '3:50',
         position: 1,
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'Sound of Madness',
         albumId: shinedownTheSoundOfMadness?._id,
         duration: '3:54',
         position: 2,
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'Second Chance',
         albumId: shinedownTheSoundOfMadness?._id,
         duration: '3:40',
         position: 3,
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'Call Me',
         albumId: shinedownTheSoundOfMadness?._id,
         duration: '3:43',
         position: 11,
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'Fly From the Inside',
         albumId: shinedownLeaveAWhisper?._id,
         duration: '3:55',
         position: 1,
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'Burning Bright',
         albumId: shinedownLeaveAWhisper?._id,
         duration: '3:46',
         position: 6,
-        isPublished: true
+        isPublished: true,
       },
       {
         title: '45',
         albumId: shinedownLeaveAWhisper?._id,
         duration: '4:09',
         position: 12,
-        isPublished: true
+        isPublished: true,
       },
       {
         title: 'All I Ever Wanted',
         albumId: shinedownLeaveAWhisper?._id,
         duration: '4:12',
         position: 8,
-        isPublished: true
-      },{
+        isPublished: true,
+      },
+      {
         title: 'Prison song',
         albumId: soadToxicity?._id,
         duration: '3:21',
         position: 1,
-        isPublished: false
-      },{
+        isPublished: false,
+      },
+      {
         title: 'Chop Suey',
         albumId: soadToxicity?._id,
         duration: '3:30',
         position: 6,
-        isPublished: false
-      },{
+        isPublished: false,
+      },
+      {
         title: 'Aerials',
         albumId: soadToxicity?._id,
         duration: '3:56',
         position: 14,
-        isPublished: false
+        isPublished: false,
       },
     ]);
 

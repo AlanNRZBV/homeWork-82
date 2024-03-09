@@ -30,10 +30,10 @@ export const addTrackToHistory = createAsyncThunk<
 >('trackHistory/addHistory', async (arg, { getState }) => {
   try {
     const token = getState().users.user?.token;
-    const track ={
-      trackId: arg
-    }
-    const response = await axiosApi.post(`/track-history`, track,{
+    const track = {
+      trackId: arg,
+    };
+    const response = await axiosApi.post(`/track-history`, track, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
