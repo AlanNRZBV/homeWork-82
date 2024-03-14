@@ -1,4 +1,4 @@
-import { Model, Schema, Types } from 'mongoose';
+import { Model } from 'mongoose';
 import ObjectId = module;
 
 export interface IArtist {
@@ -47,4 +47,4 @@ export interface UserMethods {
   generateToken(): void;
 }
 
-type UserModel = Model<UserField, {}, UserMethods>;
+type UserModel = Model<UserField, object, UserMethods>;

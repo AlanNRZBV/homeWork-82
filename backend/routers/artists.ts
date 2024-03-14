@@ -4,9 +4,6 @@ import { IArtist } from '../types';
 import { imagesUpload } from '../multer';
 import auth, { RequestWithUser } from '../middleware/auth';
 import permit from '../middleware/permit';
-import Track from '../models/Track';
-import Album from '../models/Album';
-import tracksRouter from './tracks';
 
 const artistsRouter = Router();
 

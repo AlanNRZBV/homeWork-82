@@ -96,15 +96,10 @@ usersRouter.post('/google', async(req,res,next)=>{
       return  res.status(400).send({error: 'Google login error'})
     }
 
-    console.log(payload)
-
     const email = payload['email']
     const id = payload['sub']
     const displayName = payload['name']
     const avatar = payload['picture']
-
-    console.log('payload picture check ', payload['picture'])
-
 
     if(!email){
       return res.status(400).send({error: 'Email is not present'})

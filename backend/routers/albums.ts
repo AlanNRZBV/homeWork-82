@@ -1,13 +1,10 @@
 import { Router } from 'express';
 import { imagesUpload } from '../multer';
-import { AlbumWithTrackCount, IAlbum } from '../types';
+import { IAlbum } from '../types';
 import Album from '../models/Album';
 import mongoose, { Types } from 'mongoose';
-import Artist from '../models/Artist';
-import Track from '../models/Track';
 import auth, { RequestWithUser } from '../middleware/auth';
 import permit from '../middleware/permit';
-import artistsRouter from './artists';
 
 const albumsRouter = Router();
 

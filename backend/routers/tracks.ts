@@ -2,11 +2,9 @@ import { Router } from 'express';
 import { ITrack } from '../types';
 import Track from '../models/Track';
 import mongoose from 'mongoose';
-import track from '../models/Track';
 import Album from '../models/Album';
 import auth, { RequestWithUser } from '../middleware/auth';
 import permit from '../middleware/permit';
-import albumsRouter from './albums';
 
 const tracksRouter = Router();
 
