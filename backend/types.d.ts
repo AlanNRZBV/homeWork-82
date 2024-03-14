@@ -33,10 +33,13 @@ export interface AlbumWithTrackCount {
 }
 
 export interface UserFields {
-  username: string;
+  email: string;
   password: string;
   token: string;
   role: string;
+  googleID: string,
+  avatar: string,
+  displayName: string
 }
 
 export interface UserMethods {

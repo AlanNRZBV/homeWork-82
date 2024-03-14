@@ -7,7 +7,7 @@ const SALT_WORK_FACTOR = 10;
 
 const Schema = mongoose.Schema;
 const UserSchema = new Schema<UserFields, UserModel, UserFields>({
-  username: {
+  email: {
     type: String,
     required: true,
     unique: true,
@@ -26,6 +26,12 @@ const UserSchema = new Schema<UserFields, UserModel, UserFields>({
     enum: ['admin', 'client'],
     default: 'client',
   },
+  googleID:String,
+  avatar: String,
+  displayName:{
+    type:String,
+    required:true
+  }
 });
 
 UserSchema.methods.checkPassword = function (password: string) {
