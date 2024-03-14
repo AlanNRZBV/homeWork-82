@@ -31,7 +31,7 @@ const TracksHistory = () => {
                 mb={2}
                 sx={{ borderBottom: '1px solid grey' }}
               >
-                {user?.username} track history
+                {user?.displayName} track history
               </Typography>
               <ul style={{ padding: '0', marginTop: '0' }}>
                 {history.map((item) => (

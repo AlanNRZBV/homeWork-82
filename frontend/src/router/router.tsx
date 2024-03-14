@@ -10,6 +10,7 @@ import AlbumsForm from '../features/Albums/components/AlbumsForm.tsx';
 import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute.tsx';
 import ArtistsForm from '../features/Artists/components/ArtistsForm.tsx';
 import TracksForm from '../features/Tracks/components/TracksForm.tsx';
+import Register from '../features/Users/Register.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
+      },
+      {
+        path: '/register',
+        element: <Register />,
       },
       {
         path: '/track-history',

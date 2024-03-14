@@ -42,6 +42,7 @@ export const submitAlbum = createAsyncThunk<
         formData.append(key, value);
       }
     });
+
     const response = await axiosApi.post('/albums/new', formData, {
       headers: {
         Authorization: 'Bearer ' + token,

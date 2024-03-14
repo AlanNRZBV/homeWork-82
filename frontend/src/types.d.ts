@@ -42,20 +42,26 @@ export interface TrackReduced {
 }
 
 export interface RegisterMutation {
-  username: string;
+  email: string;
   password: string;
+  displayName: string;
+  avatar: File | null,
+
 }
 
 export interface LoginMutation {
-  username: string;
+  email: string;
   password: string;
 }
 
 export interface User {
   _id: string;
-  username: string;
+  email: string;
   token: string;
   role: string;
+  displayName: string,
+  avatar?: string,
+  googleID?: string
 }
 
 export interface ValidationError {

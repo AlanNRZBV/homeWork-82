@@ -1,16 +1,6 @@
 import React, { useState } from 'react';
 import { LoginMutation } from '../../types';
-import {
-  Alert,
-  Avatar,
-  Box,
-  Button,
-  Container,
-  Grid,
-  Link,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Alert, Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
@@ -22,7 +12,7 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const error = useAppSelector(selectLoginError);
   const [state, setState] = useState<LoginMutation>({
-    username: '',
+    email: '',
     password: '',
   });
 
@@ -39,6 +29,8 @@ const Login = () => {
     await dispatch(login(state)).unwrap();
     navigate('/');
   };
+
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -65,10 +57,10 @@ const Login = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                label="Username"
-                name="username"
-                autoComplete="current-username"
-                value={state.username}
+                label="Email"
+                name="email"
+                autoComplete="current-email"
+                value={state.email}
                 onChange={inputChangeHandler}
                 fullWidth
               />
