@@ -13,13 +13,13 @@ import { GOOGLE_CLIENT_ID } from './constants.ts';
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-    <LocalizationProvider dateAdapter={AdapterMoment}>
-      <PersistGate persistor={persistor}>
-        <Provider store={store}>
-          <RouterProvider router={router} />
-        </Provider>
-      </PersistGate>
-    </LocalizationProvider>
+      <LocalizationProvider dateAdapter={AdapterMoment}>
+        <PersistGate persistor={persistor}>
+          <Provider store={store}>
+            <RouterProvider router={router} />
+          </Provider>
+        </PersistGate>
+      </LocalizationProvider>
     </GoogleOAuthProvider>
   </React.StrictMode>,
 );

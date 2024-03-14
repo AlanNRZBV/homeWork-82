@@ -70,7 +70,6 @@ const Register = () => {
     navigate('/');
   };
 
-
   return (
     <Container component="main" maxWidth="xs">
       <Box

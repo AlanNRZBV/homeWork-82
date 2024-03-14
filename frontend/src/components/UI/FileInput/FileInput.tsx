@@ -37,8 +37,15 @@ const FileInput: React.FC<Props> = ({ onChange, name, label }) => {
         onChange={onFileChange}
         ref={inputRef}
       />
-      <Grid container direction="row" spacing={2} alignItems="center" item xs={12}>
-        <Grid item xs >
+      <Grid
+        container
+        direction="row"
+        spacing={2}
+        alignItems="center"
+        item
+        xs={12}
+      >
+        <Grid item xs>
           <TextField
             disabled
             label={label}

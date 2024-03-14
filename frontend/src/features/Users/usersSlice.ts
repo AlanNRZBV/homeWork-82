@@ -60,7 +60,7 @@ export const usersSlice = createSlice({
       state.loginLoading = false;
       state.user = data.user;
     });
-    builder.addCase(googleLogin.rejected, (state, {payload: error}) => {
+    builder.addCase(googleLogin.rejected, (state, { payload: error }) => {
       state.loginLoading = false;
       state.loginError = error || null;
     });

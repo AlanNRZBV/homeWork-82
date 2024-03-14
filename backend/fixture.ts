@@ -31,8 +31,8 @@ const run = async () => {
         password: '5str0ngPswrd',
         token: crypto.randomUUID(),
         role: 'client',
-        displayName:'us0r',
-        avatar:'fixtures/avatar_user.png'
+        displayName: 'us0r',
+        avatar: 'fixtures/avatar_user.png',
       },
       {
         email: 'admin@spotify.com',
@@ -40,7 +40,7 @@ const run = async () => {
         token: crypto.randomUUID(),
         role: 'admin',
         displayName: 'Mr.Anderson',
-        avatar:'fixtures/avatar_admin.png'
+        avatar: 'fixtures/avatar_admin.png',
       },
     ]);
 

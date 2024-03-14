@@ -5,20 +5,21 @@ import { imagesUpload } from '../multer';
 import crypto from 'crypto';
 import { OAuth2Client } from 'google-auth-library';
 import config from '../config';
-
+import { IUser } from '../types';
 
 const usersRouter = Router();
-const client = new OAuth2Client()
+const client = new OAuth2Client();
 
-usersRouter.post('/', imagesUpload.single('avatar'),async (req, res, next) => {
+usersRouter.post('/', imagesUpload.single('avatar'), async (req, res, next) => {
   try {
-
-    const user = new User({
+    const userData: IUser = {
+      avatar: req.file ? req.file.filename : null,
       email: req.body.email,
       password: req.body.password,
       displayName: req.body.displayName,
-      avatar: req.file ? req.file.filename : null
-    });
+    };
+
+    const user = new User(userData);
 
     user.generateToken();
     await user.save();
@@ -83,49 +84,46 @@ usersRouter.delete('/sessions', async (req, res, next) => {
   }
 });
 
-usersRouter.post('/google', async(req,res,next)=>{
-  try{
-
+usersRouter.post('/google', async (req, res, next) => {
+  try {
     const ticket = await client.verifyIdToken({
       idToken: req.body.credential,
-      audience: config.google.clientId
-    })
+      audience: config.google.clientId,
+    });
     const payload = ticket.getPayload();
 
-    if(!payload){
-      return  res.status(400).send({error: 'Google login error'})
+    if (!payload) {
+      return res.status(400).send({ error: 'Google login error' });
     }
 
-    const email = payload['email']
-    const id = payload['sub']
-    const displayName = payload['name']
-    const avatar = payload['picture']
+    const email = payload['email'];
+    const id = payload['sub'];
+    const displayName = payload['name'];
+    const avatar = payload['picture'];
 
-    if(!email){
-      return res.status(400).send({error: 'Email is not present'})
+    if (!email) {
+      return res.status(400).send({ error: 'Email is not present' });
     }
 
-    let user = await User.findOne({googleID: id})
+    let user = await User.findOne({ googleID: id });
 
-    if(!user){
+    if (!user) {
       user = new User({
         email,
         password: crypto.randomUUID(),
         googleID: id,
         displayName,
-        avatar
-      })
+        avatar,
+      });
     }
 
-    user.generateToken()
-    await user.save()
+    user.generateToken();
+    await user.save();
 
-    return res.send({ message: 'Login with google successful', user })
-
-
-  }catch (e){
-    return next(e)
+    return res.send({ message: 'Login with google successful', user });
+  } catch (e) {
+    return next(e);
   }
-})
+});
 
 export default usersRouter;

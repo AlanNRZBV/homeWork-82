@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import { LoginMutation } from '../../types';
-import { Alert, Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
+import {
+  Alert,
+  Avatar,
+  Box,
+  Button,
+  Container,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
@@ -35,8 +45,6 @@ const Login = () => {
     await dispatch(login(state)).unwrap();
     navigate('/');
   };
-
-
 
   return (
     <Container component="main" maxWidth="xs">

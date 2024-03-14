@@ -45,8 +45,7 @@ export interface RegisterMutation {
   email: string;
   password: string;
   displayName: string;
-  avatar: File | null,
-
+  avatar: File | null;
 }
 
 export interface LoginMutation {
@@ -59,9 +58,9 @@ export interface User {
   email: string;
   token: string;
   role: string;
-  displayName: string,
-  avatar?: string,
-  googleID?: string
+  displayName: string;
+  avatar?: string;
+  googleID?: string;
 }
 
 export interface ValidationError {

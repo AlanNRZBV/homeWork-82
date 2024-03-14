@@ -1,5 +1,4 @@
 import { Model } from 'mongoose';
-import ObjectId = module;
 
 export interface IArtist {
   name: string;
@@ -21,15 +20,11 @@ export interface ITrack {
   position: string;
 }
 
-export interface AlbumWithTrackCount {
-  _id: ObjectId;
-  title: string;
-  artistId: {
-    _id: ObjectId;
-    name: string;
-  };
-  releaseDate: number;
-  cover: string | null;
+export interface IUser {
+  email: string;
+  password: string;
+  displayName: string;
+  avatar: string | null;
 }
 
 export interface UserFields {
@@ -37,9 +32,9 @@ export interface UserFields {
   password: string;
   token: string;
   role: string;
-  googleID: string,
-  avatar: string,
-  displayName: string
+  googleID: string;
+  avatar: string;
+  displayName: string;
 }
 
 export interface UserMethods {
