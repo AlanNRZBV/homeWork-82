@@ -19,7 +19,7 @@ const Navigation = () => {
         >
           Spotify
         </Typography>
-        <Box>
+        <Box display="flex" alignItems="center">
           <Button
             to="/"
             component={NavLink}

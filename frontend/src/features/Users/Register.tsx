@@ -14,8 +14,9 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectRegisterError } from './usersSlice';
-import { register } from './usersThunks';
+import { googleLogin, register } from './usersThunks';
 import FileInput from '../../components/UI/FileInput/FileInput.tsx';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Register = () => {
   const dispatch = useAppDispatch();
@@ -25,8 +26,8 @@ const Register = () => {
   const [state, setState] = useState<RegisterMutation>({
     email: '',
     password: '',
-    displayName:'',
-    avatar:null
+    displayName: '',
+    avatar: null,
   });
 
   const getFieldError = (fieldName: string) => {
@@ -47,11 +48,12 @@ const Register = () => {
 
   const submitFormHandler = async (event: React.FormEvent) => {
     event.preventDefault();
+    console.log(state);
     try {
       await dispatch(register(state)).unwrap();
       navigate('/');
     } catch (e) {
-      // error
+      console.log('Caught on try - REGISTER SUBMIT FORM - ', e);
     }
   };
   const fileInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,6 +65,11 @@ const Register = () => {
       }));
     }
   };
+  const googleLoginHandler = async (credential: string) => {
+    await dispatch(googleLogin(credential)).unwrap();
+    navigate('/');
+  };
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -77,9 +84,19 @@ const Register = () => {
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" mb={2}>
           Sign up
         </Typography>
+        <GoogleLogin
+          onSuccess={(credentialResponse) => {
+            if (credentialResponse.credential) {
+              void googleLoginHandler(credentialResponse.credential);
+            }
+          }}
+          onError={() => {
+            console.log('Login failed');
+          }}
+        />
         <Box component="form" onSubmit={submitFormHandler} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -107,7 +124,7 @@ const Register = () => {
                 fullWidth
               />
             </Grid>
-            <Grid item xs={12} mb={2}>
+            <Grid item xs={12}>
               <TextField
                 name="displayName"
                 label="Display name"
@@ -123,7 +140,6 @@ const Register = () => {
               name="avatar"
               onChange={fileInputChangeHandler}
             />
-
           </Grid>
           <Button
             type="submit"

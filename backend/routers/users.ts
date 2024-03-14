@@ -1,15 +1,23 @@
 import { Router } from 'express';
 import mongoose from 'mongoose';
 import User from '../models/User';
+import { imagesUpload } from '../multer';
+import crypto from 'crypto';
+import { OAuth2Client } from 'google-auth-library';
+import config from '../config';
+
 
 const usersRouter = Router();
+const client = new OAuth2Client()
 
-usersRouter.post('/', async (req, res, next) => {
+usersRouter.post('/', imagesUpload.single('avatar'),async (req, res, next) => {
   try {
+
     const user = new User({
       email: req.body.email,
       password: req.body.password,
-      displayName: req.body.displayName
+      displayName: req.body.displayName,
+      avatar: req.file ? req.file.filename : null
     });
 
     user.generateToken();
@@ -74,5 +82,55 @@ usersRouter.delete('/sessions', async (req, res, next) => {
     return next(e);
   }
 });
+
+usersRouter.post('/google', async(req,res,next)=>{
+  try{
+
+    const ticket = await client.verifyIdToken({
+      idToken: req.body.credential,
+      audience: config.google.clientId
+    })
+    const payload = ticket.getPayload();
+
+    if(!payload){
+      return  res.status(400).send({error: 'Google login error'})
+    }
+
+    console.log(payload)
+
+    const email = payload['email']
+    const id = payload['sub']
+    const displayName = payload['name']
+    const avatar = payload['picture']
+
+    console.log('payload picture check ', payload['picture'])
+
+
+    if(!email){
+      return res.status(400).send({error: 'Email is not present'})
+    }
+
+    let user = await User.findOne({googleID: id})
+
+    if(!user){
+      user = new User({
+        email,
+        password: crypto.randomUUID(),
+        googleID: id,
+        displayName,
+        avatar
+      })
+    }
+
+    user.generateToken()
+    await user.save()
+
+    return res.send({ message: 'Login with google successful', user })
+
+
+  }catch (e){
+    return next(e)
+  }
+})
 
 export default usersRouter;

@@ -18,6 +18,7 @@
     "@mui/lab": "^5.0.0-alpha.162",
     "@mui/material": "^5.15.6",
     "@mui/x-date-pickers": "^6.19.6",
+    "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "^2.1.0",
     "@types/moment": "^2.13.0",
     "@types/mui-image": "^1.0.5",
